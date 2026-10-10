@@ -16,6 +16,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerPlayer
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.fml.loading.FMLEnvironment
+import net.neoforged.fml.loading.FMLPaths
 import net.neoforged.neoforge.network.PacketDistributor
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 import net.neoforged.neoforge.network.handling.ClientPayloadContext
@@ -108,9 +109,9 @@ class M4idSharedApiForge : M4idSharedApi {
         PacketDistributor.sendToPlayer(player, msg)
     }
 
-    // TODO check this. Edit: Twin I DUNNO WHAT TO CHECK. :c
     override fun getConfigDir(): Path {
-        return Path.of("config")
+        // Resolve against the game directory instead of whatever the working directory happens to be
+        return FMLPaths.CONFIGDIR.get()
     }
 
     override fun <T> register(autoReg: M4idAutoRegistrar, reg: Registry<T>, thingId: String, obj: T): T {
