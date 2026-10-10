@@ -14,7 +14,7 @@ import net.minecraft.world.entity.player.Player
 
 typealias ArgDsl<S, T> = M4idArgBuilder<S, T>.() -> Unit
 typealias ArgDslTyped<S, A> = M4idArgBuilder<S, RequiredArgumentBuilder<S, A>>.(it: CommandContext<S>.() -> A) -> Unit
-typealias KCommand<SRC> = CommandContext<SRC>.() -> Unit // non-int return type command
+typealias KCommand<SRC> = CommandContext<SRC>.() -> Unit
 
 /**
  * Command registration shortcut
@@ -55,18 +55,18 @@ fun <SRC : CommandSourceStack> M4idArgBuilder<SRC, *>.suggestionListTooltipped(f
 }
 
 /**
- * Creates a Kambrik command. These commands do not return an integer, unlike
+ * Creates a M4id command. These commands do not return an integer, unlike
  * regular commands.
  */
-fun <SRC : CommandSourceStack> kambrikCommand(func: KCommand<SRC>): Command<SRC> {
+fun <SRC : CommandSourceStack> m4idCommand(func: KCommand<SRC>): Command<SRC> {
     return Command<SRC> {
         it.func()
         1
     }
 }
 
-fun kambrikServerCommand(func: KCommand<CommandSourceStack>): Command<CommandSourceStack> {
-    return kambrikCommand(func)
+fun m4idServerCommand(func: KCommand<CommandSourceStack>): Command<CommandSourceStack> {
+    return m4idCommand(func)
 }
 
 

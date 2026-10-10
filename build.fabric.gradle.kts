@@ -124,4 +124,7 @@ dependencies {
 
     implementation(libs.serialization.core)
     include(libs.serialization.core)
+
+    implementation(libs.serialization.json)
+    include(libs.serialization.json)
 }

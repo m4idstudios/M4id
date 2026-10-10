@@ -6,7 +6,7 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.JsonOps
 import dev.doctorm4id.m4id.M4id
 import dev.doctorm4id.m4id.command.addCommand
-import dev.doctorm4id.m4id.command.kambrikServerCommand
+import dev.doctorm4id.m4id.command.m4idServerCommand
 import dev.doctorm4id.m4id.command.suggestionList
 import dev.doctorm4id.m4id.ext.ResourceLocation
 import dev.doctorm4id.m4id.text.sendSuccess
@@ -61,7 +61,7 @@ object M4idCommands {
                         M4id.Logger.debug("Sending Net Test Message..")
                         TestMsg("net send here", ResourceLocation("a", "b")).sendToClient(source.playerOrException)
                     } catch (e: Exception) {
-                        M4id.Logger.debug("Kambrik Net Test Message Failed.")
+                        M4id.Logger.debug("M4id Net Test Message Failed.")
                         e.printStackTrace()
                     }
                 }
@@ -214,7 +214,7 @@ object M4idCommands {
         }
     }
 
-    private fun dumpRegistry(what: ResourceLocation) = kambrikServerCommand {
+    private fun dumpRegistry(what: ResourceLocation) = m4idServerCommand {
         if (BuiltInRegistries.REGISTRY.containsKey(what)) {
             val reg = BuiltInRegistries.REGISTRY[what]!!
             M4id.Logger.info("Contents of registry '$what':")
@@ -227,9 +227,8 @@ object M4idCommands {
         }
     }
 
-    private fun text() = kambrikServerCommand {
+    private fun text() = m4idServerCommand {
         val test = Component.literal("Hello World!")
         source.sendSystemMessage(test)
     }
-
 }

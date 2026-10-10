@@ -5,16 +5,16 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder
 import net.minecraft.commands.CommandSourceStack
 
 /**
- * Accessed via [Kambrik.Command][dev.doctorm4id.m4id.M4id.Command]
+ * Accessed via [M4id.Command][dev.doctorm4id.m4id.M4id.Command]
  */
 class M4idCommandApi internal constructor() {
 
     /**
      * Can be used to add a normal (serverside) command to the game.
      *
-     * @param baseCommandName The name of the command. The first word you type. e.g. `kambrik` becomes `/kambrik`.
+     * @param baseCommandName The name of the command. The first word you type. e.g. `m4id` becomes `/m4id`.
      * @param toDispatcher The dispatcher of this command. This is provided in a [CommandRegistrationCallback][net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback]
-     * @param func The [Command DSL](https://kambrik.ejekta.io/apis/stable/Command.html) describing your function.
+     * @param func The Command DSL describing your function.
      */
     fun addCommand(
         baseCommandName: String,
