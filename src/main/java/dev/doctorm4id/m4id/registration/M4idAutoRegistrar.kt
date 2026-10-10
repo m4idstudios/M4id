@@ -62,10 +62,12 @@ interface M4idAutoRegistrar : M4idMarker {
 
     infix fun String.forBlock(block: () -> Block) = forRegistration(BuiltInRegistries.BLOCK, block)
 
-    infix fun <C : CarverConfiguration?> String.forCarver(carver: () -> WorldCarver<C>): WorldCarver<C> = forRegistration(BuiltInRegistries.CARVER, carver) as WorldCarver<C>
+    // forRegistration hands back a Lazy, so these must too (casting it to the registered type always threw)
+    infix fun <C : CarverConfiguration?> String.forCarver(carver: () -> WorldCarver<C>): Lazy<WorldCarver<C>> =
+        forRegistration(BuiltInRegistries.CARVER, carver) as Lazy<WorldCarver<C>>
 
-    infix fun <FC : FeatureConfiguration?> String.forFeature(feature: () -> Feature<FC>): () -> Feature<FC> =
-        forRegistration(BuiltInRegistries.FEATURE, feature) as () -> Feature<FC>
+    infix fun <FC : FeatureConfiguration?> String.forFeature(feature: () -> Feature<FC>): Lazy<Feature<FC>> =
+        forRegistration(BuiltInRegistries.FEATURE, feature) as Lazy<Feature<FC>>
 
     infix fun String.forEffect(status: () -> MobEffect) =
         forRegistration(BuiltInRegistries.MOB_EFFECT, status)
