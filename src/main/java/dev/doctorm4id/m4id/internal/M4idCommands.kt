@@ -40,6 +40,9 @@ object M4idCommands {
 
         dispatcher.addCommand(M4id.MOD_ID) {
 
+            // These are debugging tools, so keep them away from regular players
+            requires { it.hasPermission(2) }
+
             "dump" {
                 "registry" {
                     val dumpables = suggestionList { BuiltInRegistries.REGISTRY.entrySet().toList().map { it.key.location() } }
@@ -48,6 +51,9 @@ object M4idCommands {
                     }
                 }
             }
+
+            // The test commands only exist in a development environment
+            if (!M4id.xplat().isDevelopmentEnvironment()) return@addCommand
 
             "test" {
                 "text" runs text()
