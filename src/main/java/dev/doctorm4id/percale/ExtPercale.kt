@@ -60,7 +60,13 @@ fun <T, U : Any> DynamicOps<T>.deserialize(
 fun <U : Any> KSerializer<U>.toCodec(serialMod: SerializersModule = EmptySerializersModule()): Codec<U> {
     return object : Codec<U> {
         override fun <T : Any> encode(input: U, ops: DynamicOps<T>, prefix: T?): DataResult<T> {
-            val result = encodeWithDynamicOps(this@toCodec, input, ops, serialMod)!!
+            // DFU expects failures as a DataResult, not as exceptions
+            val result = try {
+                encodeWithDynamicOps(this@toCodec, input, ops, serialMod)
+            } catch (e: Exception) {
+                return DataResult.error<T> { "Failed to encode ${this@toCodec.descriptor.serialName}: ${e.message}" }
+            } ?: return DataResult.error<T> { "Encoding ${this@toCodec.descriptor.serialName} produced no result" }
+
             if (prefix == null || prefix == ops.empty()) {
                 return DataResult.success(result)
             }
@@ -77,8 +83,12 @@ fun <U : Any> KSerializer<U>.toCodec(serialMod: SerializersModule = EmptySeriali
         }
 
         override fun <T : Any?> decode(ops: DynamicOps<T>, input: T): DataResult<Pair<U, T>> {
-            val result = decodeWithDynamicOps(this@toCodec, input, ops, serialMod)
-            return DataResult.success(Pair(result, input))
+            return try {
+                val result = decodeWithDynamicOps(this@toCodec, input, ops, serialMod)
+                DataResult.success(Pair(result, input))
+            } catch (e: Exception) {
+                DataResult.error<Pair<U, T>> { "Failed to decode ${this@toCodec.descriptor.serialName}: ${e.message}" }
+            }
         }
     }
 }
