@@ -8,6 +8,7 @@ build/
 !**/src/test/**/build/
 
 run/
+logs/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

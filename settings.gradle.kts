@@ -31,6 +31,3 @@ stonecutter {
 
 
 
-if (file("../Percale").exists()) {
-    includeBuild("../Percale")
-}
