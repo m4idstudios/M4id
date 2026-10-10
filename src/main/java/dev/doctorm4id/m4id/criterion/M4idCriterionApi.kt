@@ -3,12 +3,15 @@ package dev.doctorm4id.m4id.criterion
 //? > 1.20.1 {
 
 import com.mojang.serialization.JsonOps
+import dev.doctorm4id.m4id.M4id
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import net.minecraft.advancements.Criterion
+import net.minecraft.advancements.CriterionTrigger
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.util.GsonHelper
+import java.util.concurrent.CopyOnWriteArrayList
 import java.util.function.Predicate
 import kotlin.jvm.optionals.getOrNull
 //import kotlin.reflect.full.isSubclassOf
@@ -26,18 +29,29 @@ class M4idCriterionApi internal constructor() {
         fun handle(player: ServerPlayer, criterion: SimpleTrigger, predicate: SimpleTriggerPredicate)
     }
 
-    private val handlers = mutableListOf<Pair<SimpleTriggerInstance, ServerPlayer.() -> Unit>>()
+    /**
+     * A registered handler. [trigger] is the trigger the conditions were declared for, or null if only
+     * a bare conditions instance was supplied (in which case the trigger can't be checked).
+     */
+    private class Handler(
+        val trigger: CriterionTrigger<*>?,
+        val conditions: SimpleTriggerInstance,
+        val func: ServerPlayer.() -> Unit
+    )
 
-    private val subscribers = mutableListOf<KambrikCriterionSubscriber>()
+    private val handlers = CopyOnWriteArrayList<Handler>()
+
+    private val subscribers = CopyOnWriteArrayList<KambrikCriterionSubscriber>()
 
     fun handleGameTrigger(player: ServerPlayer, criterion: SimpleTrigger, predicate: SimpleTriggerPredicate) {
         for (subscriber in subscribers) {
             subscriber.handle(player, criterion, predicate)
         }
-        for ((condition, func) in handlers) {
-            val result = testAgainst(criterion, condition, predicate)
-            if (result) {
-                func(player)
+        for (handler in handlers) {
+            // If we know which trigger these conditions belong to, only test against that trigger
+            if (handler.trigger != null && handler.trigger !== criterion) continue
+            if (testAgainst(criterion, handler.conditions, predicate)) {
+                handler.func(player)
             }
         }
     }
@@ -47,19 +61,24 @@ class M4idCriterionApi internal constructor() {
     }
 
     fun addCriterionHandler(jsonString: String, func: ServerPlayer.() -> Unit) {
-        val absCond = createCriterionConditionsFromJson(
-            Json.decodeFromString(JsonObject.serializer(), jsonString)
-        )
-        addCriterionHandler(absCond ?: return, func)
+        addCriterionHandler(Json.decodeFromString(JsonObject.serializer(), jsonString), func)
     }
 
     fun addCriterionHandler(jsonObject: JsonObject, func: ServerPlayer.() -> Unit) {
-        val absCond = createCriterionConditionsFromJson(jsonObject)
-        addCriterionHandler(absCond ?: return, func)
+        val gsonData = GsonHelper.parse(jsonObject.toString()) // KSX Json to GSON Json
+        val criterion = createCriterionFromGson(gsonData) ?: return
+        val conditions = criterion.triggerInstance as? SimpleTriggerInstance ?: return
+        // Keep the trigger the JSON named, so we only fire for that trigger
+        handlers.add(Handler(criterion.trigger, conditions, func))
     }
 
+    /**
+     * Adds a handler for a bare conditions instance. Since the trigger isn't known, the handler is
+     * tested against every simple trigger that fires; a trigger whose predicate doesn't accept
+     * these conditions is skipped.
+     */
     fun addCriterionHandler(absCond: SimpleTriggerInstance, func: ServerPlayer.() -> Unit) {
-        handlers.add(absCond to func)
+        handlers.add(Handler(null, absCond, func))
     }
 
     fun createCriterionConditionsFromJson(jsonCriterion: JsonObject): SimpleTriggerInstance? {
@@ -68,23 +87,26 @@ class M4idCriterionApi internal constructor() {
     }
 
     fun createCriterionConditionsFromGson(gsonCriterion: GsonObject): SimpleTriggerInstance? {
+        return createCriterionFromGson(gsonCriterion)?.triggerInstance as? SimpleTriggerInstance
+    }
+
+    private fun createCriterionFromGson(gsonCriterion: GsonObject): Criterion<*>? {
         return try {
-            val abc = Criterion.CODEC.decode(JsonOps.INSTANCE, gsonCriterion)
-            val res = abc.result().getOrNull()
-            res?.first?.triggerInstance as? SimpleTriggerInstance
+            Criterion.CODEC.decode(JsonOps.INSTANCE, gsonCriterion).result().getOrNull()?.first
         } catch (e: Exception) {
-            e.printStackTrace()
+            M4id.Logger.error("Unable to decode criterion from JSON", e)
             null
         }
     }
 
     fun <T : SimpleTriggerInstance> testAgainst(criterion: SimpleCriterionTrigger<T>, conditions: SimpleTriggerInstance, predicate: Predicate<T>): Boolean {
-        // If the criterion we hooked into has the same ID as our Json criterion, then test
-        if (conditions::class.isInstance(criterion::class)) {
+        return try {
             @Suppress("UNCHECKED_CAST")
-            return predicate.test(conditions as T)
+            predicate.test(conditions as T)
+        } catch (e: ClassCastException) {
+            // These conditions belong to a different kind of trigger than the one that fired
+            false
         }
-        return false
     }
 
 }
