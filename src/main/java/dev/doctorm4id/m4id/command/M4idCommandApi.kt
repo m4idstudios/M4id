@@ -5,7 +5,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder
 import net.minecraft.commands.CommandSourceStack
 
 /**
- * Accessed via [Kambrik.Command][io.ejekta.kambrik.Kambrik.Command]
+ * Accessed via [Kambrik.Command][dev.doctorm4id.m4id.M4id.Command]
  */
 class M4idCommandApi internal constructor() {
 

@@ -32,15 +32,10 @@ import net.minecraft.world.item.ItemStack
 import kotlin.jvm.optionals.getOrNull
 
 object M4idCommands {
-    fun register(
-        dispatcher: CommandDispatcher<CommandSourceStack>,
-        buildContext: CommandBuildContext,
-        selection: Commands.CommandSelection
-    ) {
+    fun register(dispatcher: CommandDispatcher<CommandSourceStack>, buildContext: CommandBuildContext, selection: Commands.CommandSelection) {
 
         dispatcher.addCommand(M4id.MOD_ID) {
 
-            // These are debugging tools, so keep them away from regular players
             requires { it.hasPermission(2) }
 
             "dump" {
@@ -52,7 +47,6 @@ object M4idCommands {
                 }
             }
 
-            // The test commands only exist in a development environment
             if (!M4id.xplat().isDevelopmentEnvironment()) return@addCommand
 
             "test" {

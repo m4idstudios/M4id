@@ -10,7 +10,6 @@ class ConfigDataFile(src: File) : DataFile(src) {
         M4idPersistence.configDataFiles.add(this)
     }
 
-    // Do initial config file loading when the request is first made
     override fun <T : Any> request(key: String, serializer: KSerializer<T>, default: T) {
         super.request(key, serializer, default)
         if (!loaded) {

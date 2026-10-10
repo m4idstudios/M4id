@@ -109,7 +109,6 @@ abstract class DataFile(val src: File) {
         return try {
             M4id.Serial.Format.decodeFromString(resultSerializer, contents).toMutableMap()
         } catch (e: Exception) {
-            // A hand-edited or damaged file shouldn't crash the game: keep a copy and fall back to defaults
             val backup = File(file.path + ".corrupt")
             M4id.Logger.error("Could not parse ${file.name}; keeping a copy as ${backup.name} and using defaults", e)
             runCatching { file.copyTo(backup, overwrite = true) }
@@ -119,10 +118,8 @@ abstract class DataFile(val src: File) {
 
     open fun save() {
         synchronized(lock) {
-            // Nothing was ever read, so there's nothing to write (and the file mustn't be overwritten with an empty one)
             if (!fileRead) return
 
-            // Start from what is already stored so keys nobody requested this session aren't dropped
             val out = results.toMutableMap()
 
             for ((objId, obj) in loadedObjects) {
@@ -147,8 +144,6 @@ abstract class DataFile(val src: File) {
             Files.move(temp, target, StandardCopyOption.REPLACE_EXISTING)
         }
     }
-
-    // These are only called via the delegate properties, so casting is guaranteed to succeed
 
     @Suppress("UNCHECKED_CAST")
     internal open fun <R : Any> loadResult(key: String): R {

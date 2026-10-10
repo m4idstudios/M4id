@@ -18,7 +18,7 @@ typealias KCommand<SRC> = CommandContext<SRC>.() -> Unit // non-int return type 
 
 /**
  * Command registration shortcut
- * A simple alternate for calling [Kambrik.Command]'s addSourcedCommand
+ * A simple alternate for calling [dev.doctorm4id.m4id.M4id.Command]'s addSourcedCommand
  */
 fun CommandDispatcher<CommandSourceStack>.addCommand(
     baseCommandName: String,
@@ -54,7 +54,6 @@ fun <SRC : CommandSourceStack> M4idArgBuilder<SRC, *>.suggestionListTooltipped(f
     }
 }
 
-/* Creates a non-int return type command */
 /**
  * Creates a Kambrik command. These commands do not return an integer, unlike
  * regular commands.
@@ -70,7 +69,8 @@ fun kambrikServerCommand(func: KCommand<CommandSourceStack>): Command<CommandSou
     return kambrikCommand(func)
 }
 
-/* Shortcuts for requirements */
+
+
 
 /**
  * Used to ensure that a command requires creative mode permissions to execute

@@ -23,7 +23,6 @@ object M4idPersistence {
         }
     }
 
-    // One file failing to save shouldn't stop the rest from being written
     private fun trySave(dataFile: DataFile) {
         try {
             dataFile.save()
