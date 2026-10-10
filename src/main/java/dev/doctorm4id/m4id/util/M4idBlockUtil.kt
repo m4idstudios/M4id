@@ -3,6 +3,7 @@
 package dev.doctorm4id.m4id.util
 
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
@@ -89,10 +90,11 @@ object M4idBlockUtil {
 	 * @return A ArrayList of all adjacent neighbors
 	 */
 	fun getAdjacentNeighbors(pos: BlockPos): ArrayList<BlockPos> {
-		val list = ArrayList<BlockPos>()
-		list.addAll(getNeighborsXZPlane(pos, false))
-		list.addAll(getNeighborsXZPlane(pos.above(), true))
-		list.addAll(getNeighborsXZPlane(pos.below(), true))
+		// Only the six positions sharing a face with this one. For the full 3x3x3 cube use getNeighborsCube.
+		val list = ArrayList<BlockPos>(6)
+		for (direction in Direction.entries) {
+			list.add(pos.relative(direction))
+		}
 		return list
 	}
 

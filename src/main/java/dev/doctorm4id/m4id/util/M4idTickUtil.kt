@@ -24,11 +24,11 @@ object M4idTickUtil {
 	}
 
 	fun convertSecondsToTicks(seconds: Int): Int {
-		return seconds * TICKS_PER_SECOND
+		return Math.multiplyExact(seconds, TICKS_PER_SECOND)
 	}
 
 	fun convertMinutesToTicks(minutes: Int): Int {
-		return minutes * TICKS_PER_MINUTE
+		return Math.multiplyExact(minutes, TICKS_PER_MINUTE)
 	}
 
 	fun convertTicksToMinutes(ticks: Long): Long {
@@ -36,23 +36,54 @@ object M4idTickUtil {
 	}
 
 	fun convertHoursToTicks(hours: Int): Int {
-		return hours * TICKS_PER_HOUR
+		return Math.multiplyExact(hours, TICKS_PER_HOUR)
 	}
 
 	fun convertDaysToTicks(days: Int): Int {
-		return days * TICKS_PER_DAY
+		return Math.multiplyExact(days, TICKS_PER_DAY)
 	}
 
 	fun convertWeeksToTicks(weeks: Int): Int {
-		return weeks * TICKS_PER_WEEK
+		return Math.multiplyExact(weeks, TICKS_PER_WEEK)
 	}
 
 	fun convertMonthsToTicks(months: Int): Int {
-		return months * TICKS_PER_MONTH
+		return Math.multiplyExact(months, TICKS_PER_MONTH)
 	}
 
 	fun convertYearsToTicks(years: Int): Int {
-		return years * TICKS_PER_YEAR
+		return Math.multiplyExact(years, TICKS_PER_YEAR)
+	}
+
+	// The Int versions above throw an ArithmeticException instead of silently wrapping around when the
+	// result doesn't fit (e.g. 4 years is more than Int.MAX_VALUE ticks). Use these for long durations.
+
+	fun convertSecondsToTicks(seconds: Long): Long {
+		return Math.multiplyExact(seconds, TICKS_PER_SECOND.toLong())
+	}
+
+	fun convertMinutesToTicks(minutes: Long): Long {
+		return Math.multiplyExact(minutes, TICKS_PER_MINUTE.toLong())
+	}
+
+	fun convertHoursToTicks(hours: Long): Long {
+		return Math.multiplyExact(hours, TICKS_PER_HOUR.toLong())
+	}
+
+	fun convertDaysToTicks(days: Long): Long {
+		return Math.multiplyExact(days, TICKS_PER_DAY.toLong())
+	}
+
+	fun convertWeeksToTicks(weeks: Long): Long {
+		return Math.multiplyExact(weeks, TICKS_PER_WEEK.toLong())
+	}
+
+	fun convertMonthsToTicks(months: Long): Long {
+		return Math.multiplyExact(months, TICKS_PER_MONTH.toLong())
+	}
+
+	fun convertYearsToTicks(years: Long): Long {
+		return Math.multiplyExact(years, TICKS_PER_YEAR.toLong())
 	}
 
 	/**
