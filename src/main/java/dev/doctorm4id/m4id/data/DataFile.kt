@@ -7,6 +7,9 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.serializer
 import java.io.File
+import java.nio.file.AtomicMoveNotSupportedException
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 import kotlin.collections.iterator
 import kotlin.properties.ReadWriteProperty
 
@@ -42,6 +45,8 @@ abstract class DataFile(val src: File) {
         return DataProperty(key, default, serializer(), this)
     }
 
+    private val lock = Any()
+
     private val requests = mutableMapOf<String, DataRequest<*>>()
 
     private var results = mutableMapOf<String, JsonElement>()
@@ -50,70 +55,117 @@ abstract class DataFile(val src: File) {
 
     private val loadedObjects = mutableMapOf<String, Any>()
 
-    fun hasRequested(key: String) = key in requests
+    /**
+     * True once the file has been read from disk. Keys requested after that point are filled in
+     * straight away, since [load] won't run again for them.
+     */
+    private var fileRead = false
+
+    fun hasRequested(key: String) = synchronized(lock) { key in requests }
 
     open fun <T : Any> request(key: String, serializer: KSerializer<T>, default: T) {
-        requests[key] = DataRequest(serializer, default)
-        //println("Requested $key and serializer $serializer")
+        synchronized(lock) {
+            val request = DataRequest(serializer, default)
+            requests[key] = request
+            if (fileRead) {
+                populate(key, request)
+            }
+        }
+    }
+
+    /** Fills [loadedObjects] for [key] from the stored value, or the default if there isn't a usable one. */
+    private fun populate(key: String, request: DataRequest<*>) {
+        val stored = results.getOrPut(key) { request.encoded }
+        loadedObjects[key] = try {
+            request.decode(stored)
+        } catch (e: Exception) {
+            M4id.Logger.error("Could not read '$key' from ${src.name}, using its default value instead", e)
+            request.default
+        }
     }
 
     open fun load() {
+        synchronized(lock) {
+            results = readResults()
+            fileRead = true
+
+            for ((reqId, reqData) in requests) {
+                populate(reqId, reqData)
+            }
+        }
+    }
+
+    private fun readResults(): MutableMap<String, JsonElement> {
         val file = src
+        file.absoluteFile.parentFile?.mkdirs()
 
         if (!file.exists()) {
-            file.createNewFile()
-            file.writeText(
-                M4id.Serial.Format.encodeToString(resultSerializer, results)
-            )
+            writeAtomically(M4id.Serial.Format.encodeToString(resultSerializer, emptyMap()))
+            return mutableMapOf()
         }
 
-        val contents = file.readText().ifBlank {
-            "{}"
-        }
+        val contents = file.readText().ifBlank { "{}" }
 
-        results = M4id.Serial.Format.decodeFromString(resultSerializer, contents).toMutableMap()
-
-        for ((reqId, reqData) in requests) {
-            val result = results.getOrPut(reqId) {
-                reqData.encoded
-            }
-            val data = reqData.decode(result)
-            loadedObjects[reqId] = data
+        return try {
+            M4id.Serial.Format.decodeFromString(resultSerializer, contents).toMutableMap()
+        } catch (e: Exception) {
+            // A hand-edited or damaged file shouldn't crash the game: keep a copy and fall back to defaults
+            val backup = File(file.path + ".corrupt")
+            M4id.Logger.error("Could not parse ${file.name}; keeping a copy as ${backup.name} and using defaults", e)
+            runCatching { file.copyTo(backup, overwrite = true) }
+            mutableMapOf()
         }
     }
 
     open fun save() {
-        val file = src
+        synchronized(lock) {
+            // Nothing was ever read, so there's nothing to write (and the file mustn't be overwritten with an empty one)
+            if (!fileRead) return
 
-        val outResults = mutableMapOf<String, JsonElement>()
+            // Start from what is already stored so keys nobody requested this session aren't dropped
+            val out = results.toMutableMap()
 
-        for ((objId, obj) in loadedObjects) {
-            val data = requests[objId]!!
-            outResults[objId] = data.encode(obj)
-        }
-
-        val output = M4id.Serial.Format.encodeToString(resultSerializer, outResults)
-
-        file.apply {
-            if (!exists()) {
-                createNewFile()
+            for ((objId, obj) in loadedObjects) {
+                val data = requests[objId] ?: continue
+                out[objId] = data.encode(obj)
             }
-            writeText(output)
+
+            results = out
+            writeAtomically(M4id.Serial.Format.encodeToString(resultSerializer, out))
+        }
+    }
+
+    /** Writes to a temp file next to [src] and moves it into place, so a crash can't leave a half-written file. */
+    private fun writeAtomically(text: String) {
+        val target = src.absoluteFile.toPath()
+        target.parent?.let { Files.createDirectories(it) }
+        val temp = target.resolveSibling(target.fileName.toString() + ".tmp")
+        Files.writeString(temp, text)
+        try {
+            Files.move(temp, target, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE)
+        } catch (e: AtomicMoveNotSupportedException) {
+            Files.move(temp, target, StandardCopyOption.REPLACE_EXISTING)
         }
     }
 
     // These are only called via the delegate properties, so casting is guaranteed to succeed
 
+    @Suppress("UNCHECKED_CAST")
     internal open fun <R : Any> loadResult(key: String): R {
-        return loadedObjects[key] as R
+        synchronized(lock) {
+            return loadedObjects[key] as? R
+                ?: error("'$key' has not been loaded from ${src.name} yet")
+        }
     }
 
     internal fun <R : Any> setResult(key: String, value: R) {
-        loadedObjects[key] = value
+        synchronized(lock) {
+            loadedObjects[key] = value
+        }
     }
 
     companion object {
-        fun forServer(file: File) = ConfigDataFile(file)
-        fun forClient(file: File) = ServerDataFile(file)
+        fun forServer(file: File) = ServerDataFile(file)
+        fun forClient(file: File) = ConfigDataFile(file)
     }
 }
