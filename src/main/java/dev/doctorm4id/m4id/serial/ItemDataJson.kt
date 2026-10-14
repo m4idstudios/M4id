@@ -3,7 +3,7 @@ package dev.doctorm4id.m4id.serial
 //abstract class ItemDataJson<T> : ItemData<T>() {
 //
 //    override val serializersModule: SerializersModule
-//        get() = Kambrik.Serial.DefaultSerializers
+//        get() = M4id.Serial.DefaultSerializers
 //
 //    private val format = Json {
 //        this.serializersModule = this@ItemDataJson.serializersModule

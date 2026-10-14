@@ -15,7 +15,7 @@ import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
 
 object SimpleNbtSerializer : KSerializer<CompoundTag> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("kambrik.CompoundTag", PrimitiveKind.STRING)
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("m4id.CompoundTag", PrimitiveKind.STRING)
     override fun serialize(encoder: Encoder, value: CompoundTag) {
         encoder.encodeString(value.toString())
     }
@@ -25,7 +25,7 @@ object SimpleNbtSerializer : KSerializer<CompoundTag> {
 }
 
 object IdentitySer : KSerializer<ResourceLocation> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("kambrik.ResourceLocation", PrimitiveKind.STRING)
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("m4id.ResourceLocation", PrimitiveKind.STRING)
     override fun serialize(encoder: Encoder, value: ResourceLocation) {
         encoder.encodeString(value.toString())
     }
@@ -37,7 +37,7 @@ object IdentitySer : KSerializer<ResourceLocation> {
 object Vec3DSer : KSerializer<Vec3> {
     private val delegateSerializer = DoubleArraySerializer()
     @OptIn(ExperimentalSerializationApi::class)
-    override val descriptor: SerialDescriptor = SerialDescriptor("kambrik.Vec3d", delegateSerializer.descriptor)
+    override val descriptor: SerialDescriptor = SerialDescriptor("m4id.Vec3d", delegateSerializer.descriptor)
     override fun serialize(encoder: Encoder, value: Vec3) {
         encoder.apply {
             value.run {
@@ -57,7 +57,7 @@ object Vec3DSer : KSerializer<Vec3> {
 object BoxSerializer : KSerializer<AABB> {
     private val delegateSerializer = DoubleArraySerializer()
     @OptIn(ExperimentalSerializationApi::class)
-    override val descriptor: SerialDescriptor = SerialDescriptor("kambrik.Box", delegateSerializer.descriptor)
+    override val descriptor: SerialDescriptor = SerialDescriptor("m4id.Box", delegateSerializer.descriptor)
 
     override fun serialize(encoder: Encoder, value: AABB) {
         encoder.apply {

@@ -1,4 +1,4 @@
-package io.ejekta.kambrik.ext
+package dev.doctorm4id.m4id.ext
 
 import net.minecraft.core.Direction
 import net.minecraft.world.phys.Vec3

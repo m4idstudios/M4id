@@ -27,9 +27,9 @@ class NeoforgeEntryPoint {
 			e.printStackTrace()
 		}*/
 
-		FORGE_BUS.addListener(KambrikForgeEvents::registerCommands)
+		FORGE_BUS.addListener(M4idForgeEvents::registerCommands)
 
-		MOD_CONTEXT.getKEventBus().register(KambrikModCommonEvents::class.java)
+		MOD_CONTEXT.getKEventBus().register(M4idModCommonEvents::class.java)
 
 		runForDist(
 			clientTarget = {
@@ -40,7 +40,7 @@ class NeoforgeEntryPoint {
 		)
 	}
 
-	object KambrikForgeEvents {
+	object M4idForgeEvents {
 		@JvmStatic
 		@SubscribeEvent
 		fun registerCommands(evt: RegisterCommandsEvent) {
@@ -48,7 +48,7 @@ class NeoforgeEntryPoint {
 		}
 	}
 
-	object KambrikModCommonEvents {
+	object M4idModCommonEvents {
 		@JvmStatic
 		@SubscribeEvent
 		fun registerPayloads(event: RegisterPayloadHandlersEvent) {

@@ -1,6 +1,6 @@
 package dev.doctorm4id.m4id.ext.math
 
-import io.ejekta.kambrik.ext.toVec3
+import dev.doctorm4id.m4id.ext.toVec3
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.Vec3i

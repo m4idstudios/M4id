@@ -1,19 +1,17 @@
 package dev.doctorm4id.m4id.ext.math
 
-import io.ejekta.kambrik.ext.toVec3
+import dev.doctorm4id.m4id.ext.toVec3
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.Vec3i
 import net.minecraft.world.phys.Vec3
+import kotlin.enums.enumEntries
 import kotlin.math.*
 
-
-// Same as dirMask, but uses an absolute positive unit vector
 fun Vec3.axialMask(dir: Direction): Vec3 {
     return multiply(dir.toVec3().abs())
 }
 
-/* 1 -> 0, 0 -> 1, used for [Vec3d::flipMask] */
 private fun intSwitch(i: Int): Int {
     return (abs(i) - 1) * -1
 }
@@ -25,20 +23,16 @@ fun Vec3.flipMask(dir: Direction): Vec3 {
 }
 
 fun Vec3.hasZeroAxis(): Boolean {
-    return enumValues<Direction.Axis>().any {
+    return enumEntries<Direction.Axis>().any {
         axisValue(it) == 0.0
     }
 }
 
 // Conversion Functions
 
-/**
- * Converts all properties of the Vector to an array
- */
 fun Vec3.toArray(): DoubleArray {
     return doubleArrayOf(x, y, z)
 }
-
 
 // Math Functions
 

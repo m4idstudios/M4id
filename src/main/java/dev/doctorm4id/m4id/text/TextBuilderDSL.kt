@@ -12,33 +12,33 @@ import net.minecraft.world.item.ItemStack
 import java.util.*
 
 
-fun textLiteral(str: String = "", func: KambrikTextBuilder<MutableComponent>.() -> Unit = {}): MutableComponent {
+fun textLiteral(str: String = "", func: M4idTextBuilder<MutableComponent>.() -> Unit = {}): MutableComponent {
     return textBuilder(MutableComponent.create(PlainTextContents.LiteralContents(str)), func)
 }
 
-fun textTranslate(key: String, fallback: String, args: Array<Any> = emptyArray(), func: KambrikTextBuilder<MutableComponent>.() -> Unit = {}): MutableComponent {
+fun textTranslate(key: String, fallback: String, args: Array<Any> = emptyArray(), func: M4idTextBuilder<MutableComponent>.() -> Unit = {}): MutableComponent {
     return textBuilder(MutableComponent.create(TranslatableContents(key, fallback, args)), func)
 }
 
-fun textKeybind(key: String, func: KambrikTextBuilder<MutableComponent>.() -> Unit = {}): MutableComponent {
+fun textKeybind(key: String, func: M4idTextBuilder<MutableComponent>.() -> Unit = {}): MutableComponent {
     return textBuilder(MutableComponent.create(KeybindContents(key)), func)
 }
 
-fun textScore(name: String, objective: String, func: KambrikTextBuilder<MutableComponent>.() -> Unit = {}): MutableComponent {
+fun textScore(name: String, objective: String, func: M4idTextBuilder<MutableComponent>.() -> Unit = {}): MutableComponent {
     return textBuilder(MutableComponent.create(ScoreContents(name, objective)), func)
 }
 
-fun textSelector(pattern: String, separator: Component?, func: KambrikTextBuilder<MutableComponent>.() -> Unit = {}): MutableComponent {
+fun textSelector(pattern: String, separator: Component?, func: M4idTextBuilder<MutableComponent>.() -> Unit = {}): MutableComponent {
     return textBuilder(MutableComponent.create(SelectorContents(pattern, Optional.ofNullable(separator))), func)
 }
 
-internal fun <T : MutableComponent> textBuilder(starterText: T, func: KambrikTextBuilder<T>.() -> Unit): T {
-    val builder = KambrikTextBuilder(starterText)
+internal fun <T : MutableComponent> textBuilder(starterText: T, func: M4idTextBuilder<T>.() -> Unit): T {
+    val builder = M4idTextBuilder(starterText)
     builder.func()
     return builder.root
 }
 
-class KambrikTextBuilder<T : MutableComponent>(
+class M4idTextBuilder<T : MutableComponent>(
     var root: T
 ) {
 
@@ -100,7 +100,7 @@ class KambrikTextBuilder<T : MutableComponent>(
         hoverEvent = HoverEvent(HoverEvent.Action.SHOW_TEXT, text)
     }
 
-    fun onHoverShowText(inFunc: KambrikTextBuilder<MutableComponent>.() -> Unit) {
+    fun onHoverShowText(inFunc: M4idTextBuilder<MutableComponent>.() -> Unit) {
         hoverEvent = HoverEvent(HoverEvent.Action.SHOW_TEXT, textLiteral("", inFunc))
     }
 
@@ -110,23 +110,23 @@ class KambrikTextBuilder<T : MutableComponent>(
 
     fun newLine() = addLiteral("\n")
 
-    operator fun T.invoke(inFunc: KambrikTextBuilder<T>.() -> Unit): KambrikTextBuilder<T> {
-        return KambrikTextBuilder(this).apply(inFunc)
+    operator fun T.invoke(inFunc: M4idTextBuilder<T>.() -> Unit): M4idTextBuilder<T> {
+        return M4idTextBuilder(this).apply(inFunc)
     }
 
-    operator fun String.invoke(inFunc: KambrikTextBuilder<MutableComponent>.() -> Unit): MutableComponent {
-        return KambrikTextBuilder(MutableComponent.create(PlainTextContents.LiteralContents(this))).apply(inFunc).root
+    operator fun String.invoke(inFunc: M4idTextBuilder<MutableComponent>.() -> Unit): MutableComponent {
+        return M4idTextBuilder(MutableComponent.create(PlainTextContents.LiteralContents(this))).apply(inFunc).root
     }
 
     fun add(text: Component) {
         root.append(text)
     }
 
-    fun addLiteral(str: String, func: KambrikTextBuilder<MutableComponent>.() -> Unit = {}) {
+    fun addLiteral(str: String, func: M4idTextBuilder<MutableComponent>.() -> Unit = {}) {
         root.append(textLiteral(str, func))
     }
 
-    fun addTranslate(key: String, fallback: String, args: Array<Any> = emptyArray(), func: KambrikTextBuilder<MutableComponent>.() -> Unit = {}) {
+    fun addTranslate(key: String, fallback: String, args: Array<Any> = emptyArray(), func: M4idTextBuilder<MutableComponent>.() -> Unit = {}) {
         root.append(textTranslate(key, fallback, args, func))
     }
 

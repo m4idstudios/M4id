@@ -1,7 +1,7 @@
 package dev.doctorm4id.m4id.input
 
 class M4idKeybind(
-    val keyMod: KambrikModifiedBind,
+    val keyMod: M4idModifiedBind,
     val realTime: Boolean = false
 ) {
 

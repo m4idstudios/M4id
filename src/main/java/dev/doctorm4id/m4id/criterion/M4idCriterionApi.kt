@@ -24,7 +24,7 @@ typealias GsonObject = com.google.gson.JsonObject
  */
 class M4idCriterionApi internal constructor() {
 
-    fun interface KambrikCriterionSubscriber {
+    fun interface M4idCriterionSubscriber {
         fun handle(player: ServerPlayer, criterion: SimpleTrigger, predicate: SimpleTriggerPredicate)
     }
 
@@ -36,7 +36,7 @@ class M4idCriterionApi internal constructor() {
 
     private val handlers = CopyOnWriteArrayList<Handler>()
 
-    private val subscribers = CopyOnWriteArrayList<KambrikCriterionSubscriber>()
+    private val subscribers = CopyOnWriteArrayList<M4idCriterionSubscriber>()
 
     fun handleGameTrigger(player: ServerPlayer, criterion: SimpleTrigger, predicate: SimpleTriggerPredicate) {
         for (subscriber in subscribers) {
@@ -50,7 +50,7 @@ class M4idCriterionApi internal constructor() {
         }
     }
 
-    fun subscribe(subscriber: KambrikCriterionSubscriber) {
+    fun subscribe(subscriber: M4idCriterionSubscriber) {
         subscribers.add(subscriber)
     }
 

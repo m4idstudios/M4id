@@ -21,15 +21,15 @@ class M4idInputApi internal constructor() {
     }
 
     fun registerBinding(
-        key: KambrikModifiedBind,
+        key: M4idModifiedBind,
         realTime: Boolean = false,
         bindingDsl: M4idKeybind.() -> Unit
     ): M4idKeybind {
-        val kambrikKeybind = M4idKeybind(
+        val m4idKeybind = M4idKeybind(
             key, realTime
         ).apply(bindingDsl)
-        keyBinds.add(kambrikKeybind)
-        return kambrikKeybind
+        keyBinds.add(m4idKeybind)
+        return m4idKeybind
     }
 
 }

@@ -15,7 +15,7 @@ public class AbstractCriterionTriggerer<T extends SimpleCriterionTrigger.SimpleI
     @Inject(method = "trigger(Lnet/minecraft/server/level/ServerPlayer;Ljava/util/function/Predicate;)V",
             at = @At("HEAD")
     )
-    private void injected_kambrik(ServerPlayer player, Predicate<T> predicate, CallbackInfo ci) {
+    private void injected_m4id(ServerPlayer player, Predicate<T> predicate, CallbackInfo ci) {
         M4id.INSTANCE.getCriterion().handleGameTrigger(
                 player,
                 (SimpleCriterionTrigger<SimpleCriterionTrigger.SimpleInstance>)(Object)this,
