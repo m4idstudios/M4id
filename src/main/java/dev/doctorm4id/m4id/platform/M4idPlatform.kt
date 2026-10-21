@@ -1,6 +1,6 @@
 package dev.doctorm4id.m4id.platform
 
-interface Platform {
+interface M4idPlatform {
 
 	fun isModLoaded(modId: String?): Boolean
 

@@ -6,7 +6,7 @@ package dev.doctorm4id.m4id.platform.neoforge
 import net.neoforged.fml.ModList
 import net.neoforged.fml.loading.FMLLoader
 
-class NeoforgePlatform : Platform {
+class NeoforgeM4idPlatform : M4idPlatform {
 
 	override fun isModLoaded(modId: String?): Boolean {
 		return ModList.get().isLoaded(modId)

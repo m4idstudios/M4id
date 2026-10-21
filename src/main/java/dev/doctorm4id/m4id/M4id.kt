@@ -6,13 +6,13 @@ import dev.doctorm4id.m4id.ext.ResourceLocation
 import dev.doctorm4id.m4id.input.M4idInputApi
 import dev.doctorm4id.m4id.logging.M4idLoggingApi
 import dev.doctorm4id.m4id.message.M4idMessageApi
-import dev.doctorm4id.m4id.platform.Platform
+import dev.doctorm4id.m4id.platform.M4idPlatform
 import org.apache.logging.log4j.LogManager
 import dev.doctorm4id.m4id.serial.M4idSerialApi
 
 //? fabric {
 
-import dev.doctorm4id.m4id.platform.fabric.FabricPlatform
+import dev.doctorm4id.m4id.platform.fabric.FabricM4idPlatform
 
 //?} neoforge {
 
@@ -27,7 +27,7 @@ object M4id {
 	const val MOD_VERSION: String =  /*$ mod_version*/"0.1.0";
 	const val MOD_FRIENDLY_NAME: String =  /*$ mod_name*/"M4id";
 
-	private val PLATFORM: Platform = createPlatformInstance()
+	private val PLATFORM: M4idPlatform = createPlatformInstance()
 
 	val Logger = LogManager.getLogger("M4id")
 
@@ -67,12 +67,12 @@ object M4id {
 		Logger.debug( "{}: { version: {}; friendly_name: {} }", MOD_ID, MOD_VERSION, MOD_FRIENDLY_NAME )
 	}
 
-	fun xplat(): Platform { return PLATFORM }
+	fun xplat(): M4idPlatform { return PLATFORM }
 
-	private fun createPlatformInstance(): Platform {
+	private fun createPlatformInstance(): M4idPlatform {
 		//? fabric {
 
-		return FabricPlatform()
+		return FabricM4idPlatform()
 
 		//? } neoforge {
 
