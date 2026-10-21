@@ -127,4 +127,7 @@ dependencies {
 
     implementation(libs.serialization.json)
     include(libs.serialization.json)
+
+    implementation(kotlin("stdlib"))
+    include(kotlin("stdlib"))
 }
