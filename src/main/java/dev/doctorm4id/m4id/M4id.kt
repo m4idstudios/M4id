@@ -16,7 +16,7 @@ import dev.doctorm4id.m4id.platform.fabric.FabricM4idPlatform
 
 //?} neoforge {
 
-/*import dev.doctorm4id.m4id.platform.neoforge.NeoforgePlatform
+/*import dev.doctorm4id.m4id.platform.neoforge.NeoforgeM4idPlatform
 
 *///? }
 
@@ -76,7 +76,7 @@ object M4id {
 
 		//? } neoforge {
 
-		/*return NeoforgePlatform()
+		/*return NeoforgeM4idPlatform()
 
 		*///?}
 	}
