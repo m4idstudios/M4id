@@ -12,6 +12,7 @@ import net.minecraft.world.level.material.Fluids
 import kotlin.math.pow
 import kotlin.math.sqrt
 
+@Deprecated(message = "Please see ExtBlock.kt instead.", level = DeprecationLevel.WARNING)
 object M4idBlockUtil {
 
 	/**
@@ -19,6 +20,10 @@ object M4idBlockUtil {
 	 * @param blockState The target block state
 	 * @return true if replaceable, false otherwise
 	 */
+	@Deprecated(
+		message = "See ExtBlock.kt instead.",
+		replaceWith = ReplaceWith("blockState.isReplaceableByWater()")
+	)
 	fun isReplaceable(blockState: BlockState): Boolean {
 		return isReplaceableByWater(blockState) || blockState.canBeReplaced()
 	}
@@ -28,6 +33,10 @@ object M4idBlockUtil {
 	 * @param blockState The target block state
 	 * @return true if replaceable by water, false otherwise
 	 */
+	@Deprecated(
+		message = "See ExtBlock.kt instead.",
+		replaceWith = ReplaceWith("blockState.isReplaceableByWater()")
+	)
 	fun isReplaceableByWater(blockState: BlockState): Boolean {
 		return blockState.canBeReplaced(Fluids.WATER)
 	}
@@ -38,11 +47,19 @@ object M4idBlockUtil {
 	 * @param world Level
 	 * @return true if its indestructible, false otherwise
 	 */
+	@Deprecated(
+		message = "See ExtBlockPos.kt instead.",
+		replaceWith = ReplaceWith("blockPos.isIndestructible(level)")
+	)
 	fun isIndestructible(pos: BlockPos, world: Level): Boolean {
 		val blockState: BlockState = world.getBlockState(pos)
 		return blockState.getDestroySpeed(world, pos) < 0
 	}
 
+	@Deprecated(
+		message = "See ExtBlock.kt instead.",
+		replaceWith = ReplaceWith("blockState.isWeakBlock()")
+	)
 	/**
 	 * Checks if the block state is weak (replaceable or is air).
 	 * @param blockState The target BlockState
@@ -52,6 +69,10 @@ object M4idBlockUtil {
 		return isReplaceable(blockState) || isAir(blockState)
 	}
 
+	@Deprecated(
+		message = "See ExtBlock.kt instead.",
+		replaceWith = ReplaceWith("blockState.isAir()")
+	)
 	/**
 	 * Checks if the block state is air. This includes both regular air and cave air.
 	 * @param blockState The target BlockState
@@ -61,6 +82,10 @@ object M4idBlockUtil {
 		return blockState?.isAir == true || blockState?.`is`(Blocks.AIR) == true || blockState?.`is`(Blocks.CAVE_AIR) == true
 	}
 
+	@Deprecated(
+		message = "See ExtBlockPos.kt instead.",
+		replaceWith = ReplaceWith("blockPos.getNeighborsCube(includePos)")
+	)
 	/**
 	 * Will return an array list that represents a 3x3x3 cube of all block
 	 * positions with the origin being the centroid. Does not include origin
@@ -84,6 +109,10 @@ object M4idBlockUtil {
 		return neighbors
 	}
 
+	@Deprecated(
+		message = "See ExtBlockPos.kt instead.",
+		replaceWith = ReplaceWith("blockPos.getAdjacentNeighbors()")
+	)
 	/**
 	 * Will return an array list that represents the neighbors that are directly touching any face of the block
 	 * @param pos The target block position
@@ -98,6 +127,10 @@ object M4idBlockUtil {
 		return list
 	}
 
+	@Deprecated(
+		message = "See ExtBlockPos.kt instead.",
+		replaceWith = ReplaceWith("blockPos.getNeighborsXZPlane(includePos)")
+	)
 	/**
 	 * Will return an array list representing a 2D layer
 	 * @param pos The target block position / origin
@@ -119,6 +152,10 @@ object M4idBlockUtil {
 		return list
 	}
 
+	@Deprecated(
+		message = "See ExtBlockPos.kt instead.",
+		replaceWith = ReplaceWith("blockPos.isExposedToAir(level)")
+	)
 	/**
 	 * Checks immediate blocks to see if any of them are air
 	 * @param pos The target block position to check
@@ -139,6 +176,10 @@ object M4idBlockUtil {
 		return false
 	}
 
+	@Deprecated(
+		message = "See ExtBlockPos.kt instead.",
+		replaceWith = ReplaceWith("blockPos.isSolid(level)")
+	)
 	/**
 	 * Checks if the position is a solid block.
 	 * @param pos The target block position to check
@@ -149,6 +190,10 @@ object M4idBlockUtil {
 		return !isNotSolid(pos, level)
 	}
 
+	@Deprecated(
+		message = "See ExtBlockPos.kt instead.",
+		replaceWith = ReplaceWith("blockPos.isNotSolid(level)")
+	)
 	/**
 	 * Checks if the position is a non-solid block.
 	 * @param pos The target block position to check
@@ -164,6 +209,10 @@ object M4idBlockUtil {
 		return canNotOcclude || isNotSolid || isAir || isNotSolidRender
 	}
 
+	@Deprecated(
+		message = "See ExtBlockPos.kt instead.",
+		replaceWith = ReplaceWith("blockPos.getBlockDistance(otherPos)")
+	)
 	/**
 	 * Gets the distance between two block positions as a float.
 	 * Uses the standard 3D distance formula.
@@ -178,6 +227,10 @@ object M4idBlockUtil {
 		).toFloat()
 	}
 
+	@Deprecated(
+		message = "See ExtBlockPos.kt instead.",
+		replaceWith = ReplaceWith("blockPos.getBlockDistanceSquared(otherPos)")
+	)
 	/**
 	 * Gets squared distance between two block positions.
 	 * Useful for comparisons without sqrt.
@@ -192,6 +245,10 @@ object M4idBlockUtil {
 		return dx * dx + dy * dy + dz * dz
 	}
 
+	@Deprecated(
+		message = "See ExtLevel.kt instead.",
+		replaceWith = ReplaceWith("level.setBlockIfChanged(pos, newState, flags)")
+	)
 	/**
 	 * Set the block if changed
 	 * @param serverLevel The world
