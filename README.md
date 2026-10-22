@@ -212,6 +212,8 @@ M4id/
 ├── build.fabric.gradle.kts       Fabric build script
 ├── build.neoforge.gradle.kts     NeoForge build script
 ├── stonecutter.properties.toml   Mod metadata and per-version dependencies
+└── src/fabric/                   Fabric stuff.
+└── src/neoforge/                 Neoforge stuff.
 └── src/main/
     ├── java/dev/doctorm4id/
     │   ├── m4id/
