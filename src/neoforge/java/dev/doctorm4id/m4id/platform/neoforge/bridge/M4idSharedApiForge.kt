@@ -1,13 +1,11 @@
 package dev.doctorm4id.m4id.platform.neoforge.bridge
 
-//? neoforge {
-
-/*import dev.doctorm4id.m4id.M4id
+import dev.doctorm4id.m4id.M4id
 import dev.doctorm4id.m4id.registration.M4idAutoRegistrar
 import dev.doctorm4id.m4id.bridge.M4idSharedApi
 import dev.doctorm4id.m4id.ext.register
 import dev.doctorm4id.m4id.message.M4idMsg
-import dev.doctorm4id.m4id.platform.fabric.bridge.BridgePlatform
+import dev.doctorm4id.m4id.platform.bridge.BridgePlatform
 import dev.doctorm4id.m4id.serial.toSimplePacketCodec
 import kotlinx.serialization.KSerializer
 import net.minecraft.core.Registry
@@ -28,7 +26,6 @@ import java.nio.file.Path
 class M4idSharedApiForge : M4idSharedApi {
 
     companion object {
-        // NeoForge expects a shared payload protocol version here, not a namespace.
         private const val NETWORK_PROTOCOL_VERSION = "1"
     }
 
@@ -110,7 +107,6 @@ class M4idSharedApiForge : M4idSharedApi {
     }
 
     override fun getConfigDir(): Path {
-        // Resolve against the game directory instead of whatever the working directory happens to be
         return FMLPaths.CONFIGDIR.get()
     }
 
@@ -119,5 +115,3 @@ class M4idSharedApiForge : M4idSharedApi {
         return obj
     }
 }
-
-*///? }

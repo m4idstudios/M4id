@@ -1,7 +1,6 @@
-package dev.doctorm4id.m4id.platform.fabric.bridge
+package dev.doctorm4id.m4id.bridge
 
 import dev.doctorm4id.m4id.M4id
-import dev.doctorm4id.m4id.bridge.M4idSharedApi
 import java.util.ServiceLoader
 
 val M4idBridge: M4idSharedApi by lazy {

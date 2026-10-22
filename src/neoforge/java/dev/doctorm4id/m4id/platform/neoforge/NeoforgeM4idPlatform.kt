@@ -1,8 +1,6 @@
 package dev.doctorm4id.m4id.platform.neoforge
 
-//? neoforge {
-
-/*import dev.doctorm4id.m4id.platform.M4idPlatform
+import dev.doctorm4id.m4id.platform.M4idPlatform
 import net.neoforged.fml.ModList
 import net.neoforged.fml.loading.FMLLoader
 
@@ -24,5 +22,3 @@ class NeoforgeM4idPlatform : M4idPlatform {
 		return !FMLLoader /*? if > 1.21.7 {*/ /*.getCurrent()*/ /*?}*/.isProduction()
 	}
 }
-
-*///? }

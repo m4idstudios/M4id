@@ -1,8 +1,6 @@
 package dev.doctorm4id.m4id.platform.neoforge
 
-//? neoforge {
-
-/*object NeoforgeEventSubscriber {
+object NeoforgeEventSubscriber {
 
 /*	@JvmStatic
 	@SubscribeEvent
@@ -35,5 +33,3 @@ package dev.doctorm4id.m4id.platform.neoforge
 		}
 	}*/
 }
-
-*///? }

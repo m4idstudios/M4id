@@ -1,7 +1,6 @@
 package dev.doctorm4id.m4id.bridge
 
 import dev.doctorm4id.m4id.registration.M4idAutoRegistrar
-import dev.doctorm4id.m4id.platform.fabric.bridge.BridgePlatform
 import dev.doctorm4id.m4id.message.M4idMsg
 import kotlinx.serialization.KSerializer
 import net.minecraft.core.Registry

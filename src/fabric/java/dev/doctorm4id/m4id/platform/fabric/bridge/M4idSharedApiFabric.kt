@@ -6,9 +6,8 @@ import dev.doctorm4id.m4id.registration.M4idAutoRegistrar
 import dev.doctorm4id.m4id.registration.M4idRegistrar
 import dev.doctorm4id.m4id.bridge.M4idSharedApi
 import dev.doctorm4id.m4id.message.M4idMsg
-
+import dev.doctorm4id.m4id.bridge.BridgePlatform
 import dev.doctorm4id.m4id.serial.toSimplePacketCodec
-
 import kotlinx.serialization.KSerializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry

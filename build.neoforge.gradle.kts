@@ -46,6 +46,11 @@ publishing {
     }
 }
 
+sourceSets.named("main") {
+    java.srcDir("src/neoforge/java")
+    resources.srcDir("src/neoforge/resources")
+}
+
 stonecutter {
     val (version, loader) = current.project.split('-', limit = 2)
     properties.tags(version, loader)

@@ -1,7 +1,7 @@
 package dev.doctorm4id.m4id.message
 
 import dev.doctorm4id.m4id.M4id
-import dev.doctorm4id.m4id.platform.fabric.bridge.M4idBridge
+import dev.doctorm4id.m4id.bridge.M4idBridge
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.serializer
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload

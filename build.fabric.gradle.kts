@@ -6,6 +6,11 @@ plugins {
     `maven-publish`
 }
 
+sourceSets.named("main") {
+    java.srcDir("src/fabric/java")
+    resources.srcDir("src/fabric/resources")
+}
+
 base {
     archivesName = prop("mod.id")
 }
