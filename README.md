@@ -224,8 +224,8 @@ M4id/
     │   │   ├── input/            Keybinds
     │   │   ├── ext/              Extension functions
     │   │   └── platform/         Fabric and NeoForge implementations
-    │   │   └── util/             Mixins, Tests.
-    │   │   └── internal/         Random ass utility. -w-
+    │   │   └── util/             Random ass utility. -w-
+    │   │   └── internal/         Mixins, Tests.
     │   └── percale/              Codec, NBT, and Gson bridges
     └── resources/                Mixins, access wideners, assets
 ```
