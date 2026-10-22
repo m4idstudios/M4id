@@ -5,7 +5,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import kotlinx.serialization.json.putJsonObject
-import net.peanuuutz.tomlkt.Toml
+import dev.eav.tomlkt.Toml
 import org.gradle.api.NamedDomainObjectContainer
 import java.util.*
 

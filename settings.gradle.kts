@@ -10,11 +10,15 @@ pluginManagement {
         maven("https://maven.parchmentmc.org") { name = "ParchmentMC" }
     }
     includeBuild("build-logic")
+
+    plugins {
+        id("com.google.devtools.ksp") version "2.3.12"
+    }
 }
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-    id("dev.kikugie.stonecutter") version "0.9.2"
+    id("dev.kikugie.stonecutter") version "0.9.8"
     id("dev.kikugie.loom-back-compat") version "0.4.1"
 }
 

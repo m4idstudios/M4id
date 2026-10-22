@@ -1,6 +1,8 @@
 plugins {
     id("mod-platform")
     id("dev.kikugie.loom-back-compat")
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.kotlin.plugin.serialization")
     `maven-publish`
 }
 

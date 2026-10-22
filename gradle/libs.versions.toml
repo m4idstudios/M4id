@@ -1,17 +1,17 @@
 [versions]
-stonecutter = "0.9.2"
+stonecutter = "0.9.8"
 stonecutter-postprocess = "2.1-beta.8"
-mod-publish = "1.1.0"
+mod-publish = "2.2.1"
 dotenv-gradle = "4.0.0"
 loomx = "0.4.1"
-neoforge-moddev = "2.0.141"
+neoforge-moddev = "2.0.148"
 foojay = "1.0.0"
-devtools-ksp = "2.2.10-2.0.2"
-kotlin-jvm = "2.3.21"
-fletching-table = "0.1.0-alpha.22"
+devtools-ksp = "2.3.12"
+kotlin-jvm = "2.4.21"
+fletching-table = "0.1.0-alpha.23"
 moulberry-mixinconstraints = "1.1.0"
-vanniktech-maven-publish = "0.35.0"
-serialization-toml = "0.6.0"
+vanniktech-maven-publish = "0.37.0"
+serialization-toml = "0.6.1"
 serialization = "1.11.0"
 
 [libraries]
@@ -26,6 +26,7 @@ vanniktech-maven-publish = { module = "com.vanniktech.maven.publish:com.vannikte
 serialization-toml = { module = "dev.eav.tomlkt:tomlkt", version.ref = "serialization-toml" }
 serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }
 serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+ksp-gradle-plugin = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "devtools-ksp" }
 
 [plugins]
 stonecutter = { id = "dev.kikugie.stonecutter", version.ref = "stonecutter" }
@@ -34,8 +35,8 @@ loom-back-compat = { id = "dev.kikugie.loom-back-compat", version.ref = "loomx" 
 neoforged-moddev = { id = "net.neoforged.moddev", version.ref = "neoforge-moddev" }
 jsonlang-postprocess = { id = "dev.kikugie.postprocess.jsonlang", version.ref = "stonecutter-postprocess" }
 mod-publish-plugin = { id = "me.modmuss50.mod-publish-plugin", version.ref = "mod-publish" }
-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "devtools-ksp" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-jvm" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-jvm" }
 fletching-table = { id = "dev.kikugie.fletching-table", version.ref = "fletching-table" }
 legacyforge-moddev = { id = "net.neoforged.moddev.legacyforge", version.ref = "neoforge-moddev" }
+devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "devtools-ksp" }

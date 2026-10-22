@@ -3,7 +3,8 @@ import org.gradle.api.file.DuplicatesStrategy
 plugins {
     id("mod-platform")
     id("net.neoforged.moddev")
-    id("kotlin")
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
     `maven-publish`
 }
 
@@ -52,12 +53,6 @@ stonecutter {
     replacements.string(current.parsed >= "1.21.11") {
         replace("ResourceLocation", "Identifier")
         replace("location()", "identifier()")
-    }
-}
-
-buildscript {
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.4.10")
     }
 }
 
@@ -142,6 +137,9 @@ dependencies {
             prefer("1.6.0")
         }
     }
+
+    implementation(libs.serialization.core)
+    implementation(libs.serialization.json)
 }
 
 tasks.named("createMinecraftArtifacts") {
