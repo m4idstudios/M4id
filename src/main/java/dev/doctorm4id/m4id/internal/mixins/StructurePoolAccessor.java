@@ -10,6 +10,10 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.List;
 
+/**
+ * Mixin accessor for StructureTemplePool that exposes template elements and raw entries,
+ * allowing M4id to read and modify pool's weighted list.
+ */
 @Mixin(StructureTemplatePool.class)
 public interface StructurePoolAccessor {
     @Accessor(value = "templates")

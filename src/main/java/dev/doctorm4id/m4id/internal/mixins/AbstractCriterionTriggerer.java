@@ -10,6 +10,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.function.Predicate;
 
+/**
+ * Hooks into SimpleCriterionTrigger to forward game trigger events to M4id's criterion handler.
+ */
 @Mixin(SimpleCriterionTrigger.class)
 public class AbstractCriterionTriggerer<T extends SimpleCriterionTrigger.SimpleInstance> {
     @Inject(method = "trigger(Lnet/minecraft/server/level/ServerPlayer;Ljava/util/function/Predicate;)V",
