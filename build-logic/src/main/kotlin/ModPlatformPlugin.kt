@@ -1,6 +1,7 @@
 @file:Suppress("unused", "DuplicatedCode")
 
-import dev.kikugie.fletching_table.extension.FletchingTableExtension
+import dev.kikugie.fletching_table.FTBaseExtension
+import dev.kikugie.fletching_table.FTMixinExtension
 import dev.kikugie.stonecutter.StonecutterExperimentalAPI
 import dev.kikugie.stonecutter.build.StonecutterBuildExtension
 import org.gradle.api.DefaultTask
@@ -176,13 +177,11 @@ abstract class ModPlatformPlugin @Inject constructor() : Plugin<Project> {
 	}
 
 	private fun Project.configureFletchingTable(ctx: Context) {
-		extensions.configure<FletchingTableExtension>("fletchingTable") {
-			mixins.create("main") {
-				mixin("default", "${ctx.modId}.mixins.json")
-			}
-
-			j52j.register("main") {
-				extension("json", "**/*.json5")
+		extensions.configure<FTBaseExtension>("fletchingTable") {
+			extensions.configure<FTMixinExtension>("mixins") {
+				configure("main") {
+					mixin("${ctx.modId}.mixins.json")
+				}
 			}
 		}
 	}

@@ -8,7 +8,7 @@ neoforge-moddev = "2.0.148"
 foojay = "1.0.0"
 devtools-ksp = "2.3.12"
 kotlin-jvm = "2.4.21"
-fletching-table = "0.1.0-alpha.23"
+fletching-table = "0.2.0-alpha.9"
 moulberry-mixinconstraints = "1.1.0"
 vanniktech-maven-publish = "0.37.0"
 serialization-toml = "0.6.1"
@@ -20,7 +20,7 @@ mod-publish-plugin = { module = "me.modmuss50:mod-publish-plugin", version.ref =
 kikugie-stonecutter = { module = "dev.kikugie:stonecutter", version.ref = "stonecutter" }
 kikugie-loomx = { module = "dev.kikugie:loomx", version.ref = "loomx" }
 foojay-resolver = { module = "org.gradle.toolchains:foojay-resolver", version.ref = "foojay" }
-fletching-table = { module = "dev.kikugie:fletching-table", version.ref = "fletching-table" }
+fletching-table = { module = "dev.kikugie.fletching-table:fletching-table", version.ref = "fletching-table" }
 moulberry-mixinconstraints = { module = "com.moulberry:mixinconstraints", version.ref = "moulberry-mixinconstraints" }
 vanniktech-maven-publish = { module = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin", version.ref = "vanniktech-maven-publish" }
 serialization-toml = { module = "dev.eav.tomlkt:tomlkt", version.ref = "serialization-toml" }

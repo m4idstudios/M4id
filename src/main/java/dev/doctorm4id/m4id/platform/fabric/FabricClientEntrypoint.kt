@@ -5,7 +5,6 @@ package dev.doctorm4id.m4id.platform.fabric
 import dev.doctorm4id.m4id.M4id
 import dev.doctorm4id.m4id.data.M4idPersistence
 import dev.doctorm4id.m4id.message.M4idMsg
-import dev.kikugie.fletching_table.annotation.fabric.Entrypoint
 import dev.doctorm4id.m4id.platform.fabric.bridge.M4idSharedApiFabric
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents
@@ -13,7 +12,6 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents
 
-@Entrypoint("client")
 class FabricClientEntrypoint : ClientModInitializer {
 
 	override fun onInitializeClient() {
