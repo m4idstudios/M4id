@@ -1,11 +1,11 @@
 package dev.doctorm4id.m4id.platform.neoforge.bridge
 
 import dev.doctorm4id.m4id.M4id
+import dev.doctorm4id.m4id.bridge.BridgePlatform
 import dev.doctorm4id.m4id.registration.M4idAutoRegistrar
 import dev.doctorm4id.m4id.bridge.M4idSharedApi
 import dev.doctorm4id.m4id.ext.register
 import dev.doctorm4id.m4id.message.M4idMsg
-import dev.doctorm4id.m4id.platform.bridge.BridgePlatform
 import dev.doctorm4id.m4id.serial.toSimplePacketCodec
 import kotlinx.serialization.KSerializer
 import net.minecraft.core.Registry

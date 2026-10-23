@@ -1,8 +1,8 @@
 package dev.doctorm4id.m4id.platform.neoforge
 
 import dev.doctorm4id.m4id.M4id
+import dev.doctorm4id.m4id.bridge.M4idBridge
 import dev.doctorm4id.m4id.internal.M4idCommands
-import dev.doctorm4id.m4id.platform.bridge.M4idBridge
 import dev.doctorm4id.m4id.platform.neoforge.bridge.M4idSharedApiForge
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.Mod
