@@ -5,17 +5,17 @@ mod.name = "M4id"
 mod.group = "dev.doctorm4id"
 mod.version = "0.1.0"
 mod.channel_tag = "-alpha.5"
-mod.description = "Fork of Kambrik and Percale, a Kotlin Library."
+mod.description = "A Kotlin toolkit."
 mod.authors = ["DoctorM4id"]
 mod.contributors = ["DoctorM4id"]
 mod.inception_year = "2026"
 mod.license.name = "MIT Code & ARR Assets"
-mod.license.url = "https://github.com/DoctorM4id/M4id?tab=License-1-ov-file"
+mod.license.url = "https://github.com/m4idstudios/M4id?tab=License-1-ov-file"
 mod.license.dist = "repo"
-mod.sources_url = "https://github.com/DoctorM4id/M4id"
-mod.homepage_url = "https://github.com/DoctorM4id/M4id"
-mod.issues_url = "https://github.com/DoctorM4id/M4id/issues"
-mod.discord_url = "https://discord.doctorm4id.dev"
+mod.sources_url = "https://github.com/m4idstudios/M4id"
+mod.homepage_url = "https://github.com/m4idstudios/M4id"
+mod.issues_url = "https://github.com/m4idstudios/M4id/issues"
+mod.discord_url = "https://discord.m4idstudios.com"
 [[mod.pom.developers]]
 id = "doctorm4id"
 name = "DoctorM4id"
@@ -26,19 +26,17 @@ deps.fabric-loader = "0.19.2"
 
 [fabric."1.20.1"]
 deps.minecraft = "1.20.1"
-deps.fabric-api = "0.92.9+1.20.1"
+deps.fabric-api = "0.116.17+1.20.1"
 deps.modmenu = "7.2.2"
-deps.fabric-language-kotlin = "1.13.13+kotlin.2.4.10"
 
 [fabric."1.21.1"]
 deps.minecraft = "1.21.1"
-deps.fabric-api = "0.116.13+1.21.1"
+deps.fabric-api = "0.116.17+1.21.1"
 deps.modmenu = "11.0.4"
-deps.fabric-language-kotlin = "1.13.13+kotlin.2.4.10"
 
 [neoforge]
 
 [neoforge."1.21.1"]
 deps.minecraft = "1.21.1"
-deps.neoforge = "21.1.242"
+deps.neoforge = "21.1.264"
 deps.neoforge-language-kotlin = "5.12.0"
