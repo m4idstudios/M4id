@@ -47,8 +47,8 @@ publishing {
 }
 
 sourceSets.named("main") {
-    java.srcDir("src/neoforge/java")
-    resources.srcDir("src/neoforge/resources")
+    java.srcDir(rootProject.file("src/neoforge/java"))
+    resources.srcDir(rootProject.file("src/neoforge/resources"))
 }
 
 stonecutter {

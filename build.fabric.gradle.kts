@@ -7,8 +7,8 @@ plugins {
 }
 
 sourceSets.named("main") {
-    java.srcDir("src/fabric/java")
-    resources.srcDir("src/fabric/resources")
+    java.srcDir(rootProject.file("src/fabric/java"))
+    resources.srcDir(rootProject.file("src/fabric/resources"))
 }
 
 base {

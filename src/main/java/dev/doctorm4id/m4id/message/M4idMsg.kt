@@ -39,6 +39,9 @@ abstract class M4idMsg : CustomPacketPayload {
     }
 
     override fun type(): CustomPacketPayload.Type<out M4idMsg> {
-        return M4id.Message.payloadMap[this::class] as CustomPacketPayload.Type<out M4idMsg>
+        val payloadType = M4id.Message.payloadMap[this::class]
+            ?: error("Unregistered M4id message type: ${this::class.qualifiedName}. " + "Register this message before sending it.")
+
+        return payloadType as CustomPacketPayload.Type<out M4idMsg>
     }
 }
