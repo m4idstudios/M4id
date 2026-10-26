@@ -1,9 +1,7 @@
-import dev.kikugie.stonecutter.StonecutterExperimentalAPI
 import dev.kikugie.stonecutter.build.StonecutterBuildExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 
-@OptIn(StonecutterExperimentalAPI::class)
 class Context(
 	val project: Project,
 	val extension: ModPlatformExtension,

@@ -9,6 +9,7 @@ import dev.doctorm4id.m4id.message.M4idMessageApi
 import dev.doctorm4id.m4id.platform.M4idPlatform
 import org.apache.logging.log4j.LogManager
 import dev.doctorm4id.m4id.serial.M4idSerialApi
+import net.minecraft.resources.ResourceLocation
 import java.util.ServiceLoader
 
 @SuppressWarnings("LoggingSimilarMessage")
@@ -26,7 +27,7 @@ object M4id {
 
 	val Logger = LogManager.getLogger("M4id")
 
-	fun idOf(unique: String) = ResourceLocation(MOD_ID, unique)
+	fun idOf(unique: String): ResourceLocation = ResourceLocation(MOD_ID, unique)
 
 	val Criterion: M4idCriterionApi by lazy {
 		M4idCriterionApi()

@@ -51,7 +51,6 @@ interface M4idAutoRegistrar : M4idMarker {
      * be put inside of these methods, if desired.
      */
     fun beforeRegistration() {}
-
     fun afterRegistration() {}
 
     fun <T> String.forRegistration(reg: Registry<T>, obj: () -> T): Lazy<T> {
