@@ -77,7 +77,7 @@ platform {
 }
 
 loom {
-    accessWidenerPath = rootProject.file("src/main/resources/aw/${sc.current.version}.accesswidener")
+    accessWidenerPath = rootProject.file("src/fabric/resources/${sc.current.version}.accesswidener")
     runs.named("client") {
         client()
         ideConfigGenerated(true)
