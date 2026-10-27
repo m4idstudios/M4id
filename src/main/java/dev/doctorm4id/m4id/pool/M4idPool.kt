@@ -1,8 +1,7 @@
 @file:Suppress("unused")
 
-package dev.doctorm4id.m4id.util
+package dev.doctorm4id.m4id.pool
 
-import dev.doctorm4id.m4id.M4id
 import kotlin.random.Random
 
 class M4idPool<T> internal constructor() {
