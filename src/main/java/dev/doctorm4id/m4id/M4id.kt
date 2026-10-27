@@ -9,7 +9,9 @@ import dev.doctorm4id.m4id.message.M4idMessageApi
 import dev.doctorm4id.m4id.platform.M4idPlatform
 import org.apache.logging.log4j.LogManager
 import dev.doctorm4id.m4id.serial.M4idSerialApi
+import dev.doctorm4id.m4id.util.M4idPool
 import net.minecraft.resources.ResourceLocation
+import org.apache.logging.log4j.Logger
 import java.util.ServiceLoader
 
 @SuppressWarnings("LoggingSimilarMessage")
@@ -19,13 +21,12 @@ object M4id {
 	const val MOD_VERSION: String =  /*$ mod_version*/"0.1.0";
 	const val MOD_FRIENDLY_NAME: String =  /*$ mod_name*/"M4id";
 
-	/*private val PLATFORM: M4idPlatform = createPlatformInstance()*/
 	private val PLATFORM: M4idPlatform by lazy {
 		ServiceLoader.load(M4idPlatform::class.java).firstOrNull() ?:
 		error("No M4idPlatform provider found. " + "Check the platform's META-INF/services entry.")
 	}
 
-	val Logger = LogManager.getLogger("M4id")
+	val Logger: Logger = LogManager.getLogger("M4id")
 
 	fun idOf(unique: String): ResourceLocation = ResourceLocation(MOD_ID, unique)
 
@@ -52,6 +53,8 @@ object M4id {
 	val Input: M4idInputApi by lazy {
 		M4idInputApi()
 	}
+
+	fun <T> pool(): M4idPool<T> = M4idPool()
 
 	fun onInitialize() {
 		Logger.info( "Initializing {} on {}", MOD_ID, xplat().loader() )

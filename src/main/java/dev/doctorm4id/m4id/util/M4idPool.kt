@@ -2,9 +2,10 @@
 
 package dev.doctorm4id.m4id.util
 
+import dev.doctorm4id.m4id.M4id
 import kotlin.random.Random
 
-class M4idPool<T> {
+class M4idPool<T> internal constructor() {
 
 	private val normalEntries = mutableListOf<M4idPoolEntry<T>>()
 	private val experimentalEntries = mutableListOf<M4idPoolEntry<T>>()
