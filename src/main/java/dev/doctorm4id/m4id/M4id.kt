@@ -9,13 +9,17 @@ import dev.doctorm4id.m4id.message.M4idMessageApi
 import dev.doctorm4id.m4id.platform.M4idPlatform
 import org.apache.logging.log4j.LogManager
 import dev.doctorm4id.m4id.serial.M4idSerialApi
-import dev.doctorm4id.m4id.util.M4idPool
+import dev.doctorm4id.m4id.pool.M4idPool
+import dev.doctorm4id.m4id.tick.M4idTickApi
 import net.minecraft.resources.ResourceLocation
 import org.apache.logging.log4j.Logger
 import java.util.ServiceLoader
 
 @SuppressWarnings("LoggingSimilarMessage")
 object M4id {
+
+	// ─────────────────────────────────────────────────────────────
+	// I wanna use this sexy line.
 
 	const val MOD_ID: String = /*$ mod_id*/"m4id";
 	const val MOD_VERSION: String =  /*$ mod_version*/"0.1.0";
@@ -52,6 +56,10 @@ object M4id {
 
 	val Input: M4idInputApi by lazy {
 		M4idInputApi()
+	}
+
+	val Tick: M4idTickApi by lazy {
+		M4idTickApi()
 	}
 
 	fun <T> pool(): M4idPool<T> = M4idPool()
