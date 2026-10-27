@@ -7,13 +7,13 @@ import kotlin.math.abs
 
 object M4idTickUtil {
 
-	val TICKS_PER_SECOND: Int = 20
-	val TICKS_PER_MINUTE: Int = TICKS_PER_SECOND * 60
-	val TICKS_PER_HOUR: Int = TICKS_PER_MINUTE * 60
-	val TICKS_PER_DAY: Int = TICKS_PER_HOUR * 24
-	val TICKS_PER_WEEK: Int = TICKS_PER_DAY * 7
-	val TICKS_PER_MONTH: Int = TICKS_PER_DAY * 30
-	val TICKS_PER_YEAR: Int = TICKS_PER_DAY * 365
+	const val TICKS_PER_SECOND: Int = 20
+	const val TICKS_PER_MINUTE: Int = TICKS_PER_SECOND * 60
+	const val TICKS_PER_HOUR: Int = TICKS_PER_MINUTE * 60
+	const val TICKS_PER_DAY: Int = TICKS_PER_HOUR * 24
+	const val TICKS_PER_WEEK: Int = TICKS_PER_DAY * 7
+	const val TICKS_PER_MONTH: Int = TICKS_PER_DAY * 30
+	const val TICKS_PER_YEAR: Int = TICKS_PER_DAY * 365
 
 	fun convertSecondsToTicks(seconds: Float): Int {
 		return (seconds * TICKS_PER_SECOND).toInt()
@@ -95,10 +95,8 @@ object M4idTickUtil {
 	 * @return True if required number of ticks has passed or first occurrence. False otherwise
 	 */
 	fun hasTicksPassed(lastTickTime: Long, currentTickTime: Long, ticks: Long): Boolean {
-		if (lastTickTime == 0L) return true
-
-		return abs(currentTickTime - lastTickTime) >= ticks
-	}
+        return lastTickTime == 0L || abs(currentTickTime - lastTickTime) >= ticks
+    }
 
 	/**
 	 * Checks if number of ticks has passed using level's current tick.
