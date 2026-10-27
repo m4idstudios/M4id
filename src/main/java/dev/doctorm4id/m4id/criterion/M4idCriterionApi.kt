@@ -24,6 +24,10 @@ typealias GsonObject = com.google.gson.JsonObject
  */
 class M4idCriterionApi internal constructor() {
 
+    init {
+        M4id.Logger.debug("M4id Criterion API Initialized.")
+    }
+
     fun interface M4idCriterionSubscriber {
         fun handle(player: ServerPlayer, criterion: SimpleTrigger, predicate: SimpleTriggerPredicate)
     }

@@ -1,6 +1,12 @@
 package dev.doctorm4id.m4id.input
 
+import dev.doctorm4id.m4id.M4id
+
 class M4idInputApi internal constructor() {
+
+    init {
+        M4id.Logger.debug("M4id Input API Initialized.")
+    }
 
     private val keyBinds = mutableListOf<M4idKeybind>()
 

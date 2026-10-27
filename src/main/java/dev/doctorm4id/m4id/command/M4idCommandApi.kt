@@ -2,12 +2,17 @@ package dev.doctorm4id.m4id.command
 
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.builder.LiteralArgumentBuilder
+import dev.doctorm4id.m4id.M4id
 import net.minecraft.commands.CommandSourceStack
 
 /**
  * Accessed via [M4id.Command][dev.doctorm4id.m4id.M4id.Command]
  */
 class M4idCommandApi internal constructor() {
+
+    init {
+        M4id.Logger.debug("M4id Command API Initialized.")
+    }
 
     /**
      * Can be used to add a normal (serverside) command to the game.
