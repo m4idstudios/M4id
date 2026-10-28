@@ -179,7 +179,7 @@ val encoded = json.encodeToString(Waypoint.serializer(), waypoint)
 |---|:---:|:---:|---|
 | 1.21.1 | ✅ | ✅ | Supported |
 | 1.20.1 | planned | n/a | Planned, as needed |
-| 26.1 and newer | planned | planned | Planned |
+| 26.1.2 and newer | planned | planned | Planned |
 
 Versions between these are skipped. The full matrix, including the latest release per version, is in [SECURITY.md](SECURITY.md).
 

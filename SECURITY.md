@@ -8,8 +8,8 @@ Security fixes are applied to versions marked **Supported**. Versions marked **P
 |---|---|---|---|---|
 | 26.3 | Planned | NeoForge, Fabric | n/a | |
 | 26.2 | Planned | NeoForge, Fabric | n/a | |
-| 26.1 | Planned | NeoForge, Fabric | n/a | |
-| 26.1.1 – 26.1.2 | Skipped | n/a | n/a | |
+| 26.1.2 | Planned | NeoForge, Fabric | n/a | |
+| 26.1 – 26.1.1 | Skipped | n/a | n/a | |
 | 1.21.2 – 1.21.11 | Skipped | n/a | n/a | |
 | **1.21.1** | **Supported** | NeoForge, Fabric | `0.1.0-alpha.4` | |
 | 1.20.2 – 1.20.10 | Skipped | n/a | n/a | |
