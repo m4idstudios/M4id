@@ -49,7 +49,7 @@ sealed class Loader(val id: String) {
 				description = ctx.description,
 				icon = "assets/icon.png",
 				license = ctx.licenseName,
-				accessWidener = "aw/${ctx.currentMcVersion}.accesswidener",
+				accessWidener = "${ctx.currentMcVersion}.accesswidener",
 				entrypoints = mapOf(
 					"main" to listOf("${ctx.modGroup}.${ctx.modId}.platform.fabric.FabricEntrypoint"),
 					"client" to listOf("${ctx.modGroup}.${ctx.modId}.platform.fabric.FabricClientEntrypoint"),
@@ -67,7 +67,7 @@ sealed class Loader(val id: String) {
 
 	sealed class ForgeLike(id: String) : Loader(id) {
 		override val excludedResources = listOf(
-			"fabric.mod.json", "aw/*.accesswidener", ".cache"
+			"fabric.mod.json", "*.accesswidener", ".cache"
 		)
 
 		override fun generateManifest(ctx: Context): String {

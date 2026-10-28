@@ -51,8 +51,8 @@ publishing {
 }
 
 sourceSets.named("main") {
-    java.srcDir(rootProject.file("src/neoforge/java"))
-    resources.srcDir(rootProject.file("src/neoforge/resources"))
+    java.srcDir(rootProject.file("neoforge/src/main/java"))
+    resources.srcDir(rootProject.file("neoforge/src/main/resources"))
 }
 
 stonecutter {
@@ -83,7 +83,7 @@ platform {
 
 neoForge {
     version = prop("deps.neoforge")
-    accessTransformers.from(rootProject.file("src/neoforge/resources/${stonecutter.current.version}.cfg"))
+    accessTransformers.from(rootProject.file("neoforge/src/main/resources/${stonecutter.current.version}.cfg"))
     validateAccessTransformers = true
 
     if (hasProperty("deps.parchment")) parchment {

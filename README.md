@@ -209,12 +209,12 @@ The active version lives in `.sc_active_version` (for example `1.21.1-fabric`). 
 ```
 M4id/
 ├── build-logic/                  Convention plugin: manifests, publishing, mixins
-├── build.fabric.gradle.kts       Fabric build script
-├── build.neoforge.gradle.kts     NeoForge build script
 ├── stonecutter.properties.toml   Mod metadata and per-version dependencies
-└── src/fabric/                   Fabric stuff.
-└── src/neoforge/                 Neoforge stuff.
-└── src/main/
+├── stonecutter.gradle.kts        SETTINGS MGMMGMGMGMHMMHGMHGMGMH
+├── settings.gradle.kts           Verisons.
+└── fabric/                       Fabric, + build script, accesswidener
+└── neoforge/                     Neoforge, + build script, accesswidener
+└── src/main/                     Common
     ├── java/dev/doctorm4id/
     │   ├── m4id/
     │   │   ├── command/          Command DSL
@@ -226,10 +226,12 @@ M4id/
     │   │   ├── input/            Keybinds
     │   │   ├── ext/              Extension functions
     │   │   └── platform/         Fabric and NeoForge implementations
-    │   │   └── util/             Random ass utility. -w-
     │   │   └── internal/         Mixins, Tests.
+    │   │   └── tick/             Tick helper thing.
+    │   │   └── pool/             Pool utility.
+    │   ├── m4idx/                Unmature stuff. (future planning.)
     │   └── percale/              Codec, NBT, and Gson bridges
-    └── resources/                Mixins, access wideners, assets
+    └── resources/                Mixins, assets
 ```
 
 </details>

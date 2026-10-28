@@ -7,8 +7,8 @@ plugins {
 }
 
 sourceSets.named("main") {
-    java.srcDir(rootProject.file("src/fabric/java"))
-    resources.srcDir(rootProject.file("src/fabric/resources"))
+    java.srcDir(rootProject.file("fabric/src/main/java"))
+    resources.srcDir(rootProject.file("fabric/src/main/resources"))
 }
 
 base {
@@ -81,7 +81,7 @@ platform {
 }
 
 loom {
-    accessWidenerPath = rootProject.file("src/fabric/resources/${sc.current.version}.accesswidener")
+    accessWidenerPath = rootProject.file("fabric/src/main/resources/${sc.current.version}.accesswidener")
     runs.named("client") {
         client()
         ideConfigGenerated(true)
