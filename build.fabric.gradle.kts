@@ -15,7 +15,11 @@ base {
     archivesName = prop("mod.id")
 }
 
-val jvmTargetVersion = if (sc.current.parsed >= "1.20.5") 21 else 17
+val jvmTargetVersion = when {
+    sc.current.parsed >= "26.1" -> 25
+    sc.current.parsed >= "1.20.5" -> 21
+    else -> 17
+}
 
 java {
     toolchain {
@@ -51,8 +55,8 @@ stonecutter {
     properties.tags(version, loader)
 
     replacements.string(current.parsed >= "1.21.11") {
-        replace("ResourceLocation", "Identifier")
-        replace("location()", "identifier()")
+        replace("WorldRenderEvents", "LevelRenderEvents")
+        replace("ClientCommandManager", "ClientCommands")
     }
     replacements.string(current.parsed >= "26.1.2") {
         replace("FabricDataOutput", "FabricPackOutput")

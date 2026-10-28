@@ -15,7 +15,11 @@ base {
     archivesName = prop("mod.id")
 }
 
-val jvmTargetVersion = if (sc.current.parsed >= "1.20.5") 21 else 17
+val jvmTargetVersion = when {
+    sc.current.parsed >= "26.1" -> 25
+    sc.current.parsed >= "1.20.5" -> 21
+    else -> 17
+}
 
 java {
     toolchain {
