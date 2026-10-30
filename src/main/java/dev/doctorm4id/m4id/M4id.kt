@@ -1,5 +1,6 @@
 package dev.doctorm4id.m4id
 
+import dev.doctorm4id.m4id.bridge.M4idSharedApi
 import dev.doctorm4id.m4id.command.M4idCommandApi
 import dev.doctorm4id.m4id.criterion.M4idCriterionApi
 import dev.doctorm4id.m4id.ext.ResourceLocation
@@ -7,7 +8,6 @@ import dev.doctorm4id.m4id.input.M4idInputApi
 import dev.doctorm4id.m4id.internal.TestMsg
 import dev.doctorm4id.m4id.logging.M4idLoggingApi
 import dev.doctorm4id.m4id.message.M4idMessageApi
-import dev.doctorm4id.m4id.platform.M4idPlatform
 import org.apache.logging.log4j.LogManager
 import dev.doctorm4id.m4id.serial.M4idSerialApi
 import dev.doctorm4id.m4id.pool.M4idPool
@@ -26,9 +26,9 @@ object M4id {
 	const val MOD_VERSION: String =  /*$ mod_version*/"0.1.0";
 	const val MOD_FRIENDLY_NAME: String =  /*$ mod_name*/"M4id";
 
-	private val PLATFORM: M4idPlatform by lazy {
-		ServiceLoader.load(M4idPlatform::class.java).firstOrNull() ?:
-		error("No M4idPlatform provider found. " + "Check the platform's META-INF/services entry.")
+	val SharedApi: M4idSharedApi by lazy {
+		ServiceLoader.load(M4idSharedApi::class.java).firstOrNull() ?:
+		error("No M4idSharedApi provider found. " + "Check the platform's META-INF/services entry.")
 	}
 
 	val Logger: Logger = LogManager.getLogger(MOD_FRIENDLY_NAME)
@@ -66,16 +66,14 @@ object M4id {
 	fun <T> Pool(): M4idPool<T> = M4idPool()
 
 	fun onInitialize() {
-		Logger.info( "Initializing {} on {}", MOD_ID, xplat().loader() )
+		Logger.info( "Initializing {} on {}", MOD_ID, SharedApi.platform )
 		Logger.debug( "{}: { version: {}; friendly_name: {} }", MOD_ID, MOD_VERSION, MOD_FRIENDLY_NAME )
 
 		Message.registerClientMessage<TestMsg>(idOf("test"))
 	}
 
 	fun onInitializeClient() {
-		Logger.info( "Initializing {} Client on {}", MOD_ID, xplat().loader() )
+		Logger.info( "Initializing {} Client on {}", MOD_ID, SharedApi.platform )
 		Logger.debug( "{}: { version: {}; friendly_name: {} }", MOD_ID, MOD_VERSION, MOD_FRIENDLY_NAME )
 	}
-
-	fun xplat(): M4idPlatform { return PLATFORM }
 }

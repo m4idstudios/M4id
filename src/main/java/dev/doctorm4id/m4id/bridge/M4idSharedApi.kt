@@ -12,8 +12,12 @@ interface M4idSharedApi {
 
     val platform: BridgePlatform
 
+    fun isDevEnvironment(): Boolean
+
     fun isOnClient(): Boolean
     fun isOnServer(): Boolean
+
+    fun isModLoaded(modId: String?): Boolean
 
     fun <M : M4idMsg> registerClientMessage(
         serializer: KSerializer<M>,

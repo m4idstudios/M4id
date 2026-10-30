@@ -5,6 +5,7 @@ import com.mojang.brigadier.context.CommandContext
 import com.mojang.serialization.Codec
 import com.mojang.serialization.JsonOps
 import dev.doctorm4id.m4id.M4id
+import dev.doctorm4id.m4id.bridge.M4idSharedApi
 import dev.doctorm4id.m4id.command.addCommand
 import dev.doctorm4id.m4id.command.m4idServerCommand
 import dev.doctorm4id.m4id.command.suggestionList
@@ -47,7 +48,7 @@ object M4idCommands {
                 }
             }
 
-            if (!M4id.xplat().isDevelopmentEnvironment()) return@addCommand
+            if (!M4id.SharedApi.isDevEnvironment()) return@addCommand
 
             "test" {
                 "text" runs text()

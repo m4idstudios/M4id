@@ -13,6 +13,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerPlayer
 import net.neoforged.api.distmarker.Dist
+import net.neoforged.fml.ModList
 import net.neoforged.fml.loading.FMLEnvironment
 import net.neoforged.fml.loading.FMLPaths
 import net.neoforged.neoforge.network.PacketDistributor
@@ -29,12 +30,14 @@ class M4idSharedApiForge : M4idSharedApi {
         private const val NETWORK_PROTOCOL_VERSION = "1"
     }
 
-    init {
-        M4id.Logger.debug("M4id Shared API (Forge) Initialized.")
-    }
-
     override val platform: BridgePlatform
         get() = BridgePlatform.NEOFORGE
+
+    override fun isDevEnvironment(): Boolean =
+        !FMLEnvironment.production
+
+    override fun isModLoaded(modId: String?): Boolean =
+        ModList.get().isLoaded(modId)
 
     // Event methods
 

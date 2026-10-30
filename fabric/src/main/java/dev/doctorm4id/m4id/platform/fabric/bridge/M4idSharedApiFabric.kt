@@ -1,7 +1,5 @@
 package dev.doctorm4id.m4id.platform.fabric.bridge
 
-//? fabric {
-
 import dev.doctorm4id.m4id.registration.M4idAutoRegistrar
 import dev.doctorm4id.m4id.registration.M4idRegistrar
 import dev.doctorm4id.m4id.bridge.M4idSharedApi
@@ -22,6 +20,12 @@ class M4idSharedApiFabric : M4idSharedApi {
 
     override val platform: BridgePlatform
         get() = BridgePlatform.FABRIC
+
+    override fun isDevEnvironment(): Boolean =
+        FabricLoader.getInstance().isDevelopmentEnvironment
+
+    override fun isModLoaded(modId: String?): Boolean =
+        FabricLoader.getInstance().isModLoaded(modId)
 
     // Messaging
 
@@ -73,5 +77,3 @@ class M4idSharedApiFabric : M4idSharedApi {
         var clientMessageSender: ((M4idMsg) -> Unit)? = null
     }
 }
-
-//? }
