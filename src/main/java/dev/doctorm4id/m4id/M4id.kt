@@ -4,6 +4,7 @@ import dev.doctorm4id.m4id.command.M4idCommandApi
 import dev.doctorm4id.m4id.criterion.M4idCriterionApi
 import dev.doctorm4id.m4id.ext.ResourceLocation
 import dev.doctorm4id.m4id.input.M4idInputApi
+import dev.doctorm4id.m4id.internal.TestMsg
 import dev.doctorm4id.m4id.logging.M4idLoggingApi
 import dev.doctorm4id.m4id.message.M4idMessageApi
 import dev.doctorm4id.m4id.platform.M4idPlatform
@@ -19,7 +20,7 @@ import java.util.ServiceLoader
 object M4id {
 
 	// ─────────────────────────────────────────────────────────────
-	// I wanna use this sexy line.
+	// I wanna use this prety line.
 
 	const val MOD_ID: String = /*$ mod_id*/"m4id";
 	const val MOD_VERSION: String =  /*$ mod_version*/"0.1.0";
@@ -30,7 +31,7 @@ object M4id {
 		error("No M4idPlatform provider found. " + "Check the platform's META-INF/services entry.")
 	}
 
-	val Logger: Logger = LogManager.getLogger("M4id")
+	val Logger: Logger = LogManager.getLogger(MOD_FRIENDLY_NAME)
 
 	fun idOf(unique: String): ResourceLocation = ResourceLocation(MOD_ID, unique)
 
@@ -62,11 +63,13 @@ object M4id {
 		M4idTickApi()
 	}
 
-	fun <T> pool(): M4idPool<T> = M4idPool()
+	fun <T> Pool(): M4idPool<T> = M4idPool()
 
 	fun onInitialize() {
 		Logger.info( "Initializing {} on {}", MOD_ID, xplat().loader() )
 		Logger.debug( "{}: { version: {}; friendly_name: {} }", MOD_ID, MOD_VERSION, MOD_FRIENDLY_NAME )
+
+		Message.registerClientMessage<TestMsg>(idOf("test"))
 	}
 
 	fun onInitializeClient() {

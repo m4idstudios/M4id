@@ -56,10 +56,13 @@ object M4idCommands {
                         println(doot())
                     }
                 }
+
+                // TODO: Fix ([23:02:38] [Render thread/WARN] (Minecraft) Unknown custom packet payload: m4id:test)
+                // I swear it worked before I am not crazy....
                 "net" runs {
                     try {
                         M4id.Logger.debug("Sending Net Test Message..")
-                        TestMsg("net send here", ResourceLocation("a", "b")).sendToClient(source.playerOrException)
+                        TestMsg("net send here").sendToClient(source.playerOrException)
                     } catch (e: Exception) {
                         M4id.Logger.debug("M4id Net Test Message Failed.")
                         e.printStackTrace()
@@ -74,10 +77,6 @@ object M4idCommands {
                     itemTests(this, buildContext)
                 }
 
-                "comp" runs {
-                    compTests(this)
-                }
-
                 "percale" {
                     "toggle" {
                         "logs" runs {
@@ -88,12 +87,6 @@ object M4idCommands {
                 }
             }
         }
-
-
-    }
-
-    fun compTests(commandContext: CommandContext<CommandSourceStack>) {
-
 
 
     }

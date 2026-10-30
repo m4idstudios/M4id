@@ -31,3 +31,12 @@ fun Level.setBlockIfChanged(pos: BlockPos, newState: BlockState, flags: Int = 2)
     if (getBlockState(pos) == newState) return false
     return setBlock(pos, newState, flags)
 }
+
+/**
+ * every seconds....... every se con d
+ */
+fun Level.everySeconds(secs: Int, offset: Long = 0L, func: () -> Unit) {
+    if (((gameTime + (secs * 20) + offset) % 20) == 0L) {
+        func()
+    }
+}

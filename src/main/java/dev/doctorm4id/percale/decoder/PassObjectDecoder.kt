@@ -10,7 +10,6 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlin.jvm.optionals.getOrNull
 import kotlin.streams.asSequence
 
-@OptIn(ExperimentalSerializationApi::class)
 class PassObjectDecoder<T>(override val ops: DynamicOps<T>, override val input: T, level: Int, serialMod: SerializersModule) : PassDecoder<T>(ops, level, serialMod) {
 
     private var inputMap =
