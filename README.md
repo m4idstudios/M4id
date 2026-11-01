@@ -53,10 +53,10 @@ repositories {
 
 dependencies {
     // Fabric
-    modImplementation("com.github.DoctorM4id.M4id:1.21.1-fabric:0.1.0-alpha.4")
+    modImplementation("com.github.DoctorM4id.M4id:1.21.1-fabric:0.1.0-alpha.6")
 
     // NeoForge
-    implementation("com.github.DoctorM4id.M4id:1.21.1-neoforge:0.1.0-alpha.4")
+    implementation("com.github.DoctorM4id.M4id:1.21.1-neoforge:0.1.0-alpha.6")
 }
 ```
 
@@ -225,7 +225,6 @@ M4id/
     │   │   ├── text/             Text builder
     │   │   ├── input/            Keybinds
     │   │   ├── ext/              Extension functions
-    │   │   └── platform/         Fabric and NeoForge implementations
     │   │   └── internal/         Mixins, Tests.
     │   │   └── tick/             Tick helper thing.
     │   │   └── pool/             Pool utility.
