@@ -8,7 +8,7 @@
 Write commands, networking, config, and registration once, with Kotlin DSLs, and run them on both loaders. Used and required for my mods.
 
 [![JitPack](https://jitpack.io/v/DoctorM4id/M4id.svg)](https://jitpack.io/#DoctorM4id/M4id)
-[![License: MPL-2.0](https://img.shields.io/badge/license-MPL--2.0-blue.svg)](LICENSE)
+[![License: ARR](https://img.shields.io/badge/license-ARR-blue.svg)](LICENSE)
 ![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-62B47A)
 ![Loaders](https://img.shields.io/badge/loaders-Fabric%20%7C%20NeoForge-DBB69B)
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.x-7F52FF?logo=kotlin&logoColor=white)
@@ -248,7 +248,3 @@ M4id/
 ## Credits
 
 M4id is a fork of **Kambrik** and **Percale**. Thanks to the original authors. ❤️
-
-## License
-
-Licensed under the [Mozilla Public License 2.0](LICENSE).
