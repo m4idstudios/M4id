@@ -12,19 +12,7 @@ plugins {
     alias(libs.plugins.legacyforge.moddev).apply(false)
 }
 
-stonecutter active file(".sc_active_version")
-
-tasks.register("runActiveClient") {
-    group = "stonecutter"
-    description = "Run client of the active Stonecutter version"
-    dependsOn(stonecutter.current!!.project + ":runClient")
-}
-
-tasks.register("runActiveServer") {
-    group = "stonecutter"
-    description = "Run server of the active Stonecutter version"
-    dependsOn(stonecutter.current!!.project + ":runServer")
-}
+stonecutter active "1.21.1-fabric"
 
 stonecutter parameters {
     constants.match(current.project.substringAfterLast('-'), "fabric", "neoforge", "forge")
@@ -34,6 +22,16 @@ stonecutter parameters {
     swaps["mod_group"] = "\"${properties.get<String>("mod.group")}\";"
     swaps["minecraft"] = "\"${current.version}\";"
     constants["release"] = properties.get<String>("mod.id") != "modtemplate"
+
+    replacements {
+        string(current.parsed >= "1.21.11") {
+            replace("ResourceLocation", "Identifier")
+        }
+
+        string(current.parsed >= "26.1") {
+            replace("accessWidener v2 named", "accessWidener v2 official")
+        }
+    }
 }
 
 for (version in stonecutter.versions.map { it.version }.distinct()) tasks.register("publish$version") {

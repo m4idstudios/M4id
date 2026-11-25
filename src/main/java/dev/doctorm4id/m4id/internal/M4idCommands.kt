@@ -88,8 +88,6 @@ object M4idCommands {
                 }
             }
         }
-
-
     }
 
     fun itemTests(commandContext: CommandContext<CommandSourceStack>, registryAccess: CommandBuildContext) {
